@@ -1,11 +1,9 @@
-"use client";
-
 import { motion } from "framer-motion";
 import { useFollowPointer } from "../hooks/useFollowPointer";
 import { useContext } from "react";
 import { CursorContext } from "contexts/CursorContext";
 
-export default function Cursor() {
+export const Cursor = () => {
   const {
     cursorX,
     cursorY,
@@ -43,4 +41,4 @@ export default function Cursor() {
       }}
     />
   );
-}
+};

@@ -1,25 +1,9 @@
-import {
-  AnchorHTMLAttributes,
-  HTMLAttributes,
-  MouseEvent,
-  ReactNode,
-  useCallback,
-  useContext,
-} from "react";
+import { MouseEvent, useCallback, useContext } from "react";
 
-import { HTMLMotionProps, motion } from "framer-motion";
 import { CursorContext } from "contexts/CursorContext";
+import { LinkProps } from "typings";
 
-interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  children: ReactNode;
-  color?: string;
-}
-
-export const Link: React.FC<LinkProps> = ({
-  children,
-  color = "#000000",
-  ...props
-}) => {
+export const Link = ({ children, color = "#000000", ...props }: LinkProps) => {
   const { underlineElementWithCursor, resetCursor } = useContext(CursorContext);
 
   const handleMouseEnter = useCallback((e: MouseEvent<HTMLAnchorElement>) => {

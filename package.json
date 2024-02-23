@@ -1,6 +1,6 @@
 {
-  "name": "magic-cursor",
-  "version": "0.0.1",
+  "name": "react-magic-cursor",
+  "version": "0.0.6",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -9,8 +9,7 @@
   },
   "dependencies": {
     "framer-motion": "^11.0.6",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "vite-plugin-dts": "^3.7.3"
   },
   "devDependencies": {
     "@types/react": "^18.2.56",
@@ -22,5 +21,38 @@
     "eslint-plugin-react-refresh": "^0.4.5",
     "vite": "^5.1.4",
     "vite-tsconfig-paths": "^4.3.1"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "description": "A cursor that follow your mouse (euh sorry but no magic here...) yes, until you hover specific component and the cursor adapt base on the hovered element.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicoDos/magic-cursor.git"
+  },
+  "keywords": [
+    "react",
+    "animation",
+    "motion",
+    "cursor"
+  ],
+  "author": "Nicolas Sandron",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NicoDos/magic-cursor/issues"
+  },
+  "homepage": "https://github.com/NicoDos/magic-cursor#readme",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.umd.js",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/index.es.js",
+  "exports": {
+    ".": {
+      "types": "./dist/typings/index.d.ts",
+      "default": "./dist/index.js"
+    }
   }
 }

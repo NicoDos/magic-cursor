@@ -1,25 +1,5 @@
 import { createContext } from "react";
-
-export interface ICursorContext {
-  cursorX: number;
-  cursorY: number;
-  cursorWidth: number;
-  cursorHeight: number;
-  cursorBorderColor: string;
-  cursorBorderWidth: number;
-  cursorBorderRadius: number;
-  outlineElementWithCursor: (
-    e: EventTarget,
-    color?: string,
-    radius?: string
-  ) => void;
-  underlineElementWithCursor: (
-    e: EventTarget,
-    color?: string,
-    radius?: string
-  ) => void;
-  resetCursor: () => void;
-}
+import { ICursorContext } from "typings";
 
 export const CursorContext = createContext<ICursorContext>({
   cursorX: 0,

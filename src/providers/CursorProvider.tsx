@@ -1,7 +1,8 @@
 import { CursorContext } from "contexts/CursorContext";
 import { useCallback, useState } from "react";
+import { CursorProviderProps } from "typings";
 
-export function CursorProvider({ children }: { children: React.ReactNode }) {
+export function CursorProvider({ children }: CursorProviderProps) {
   const [cursorX, setCursorX] = useState(0);
   const [cursorY, setCursorY] = useState(0);
   const [cursorHeight, setCursorHeight] = useState(30);
