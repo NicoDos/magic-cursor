@@ -30,7 +30,7 @@ a:hover {
 }
 
 a.green:hover {
-  color: #89d205;
+  color: #09b52c;
 }
 
 body {
@@ -75,7 +75,7 @@ button.green:hover {
 }
 
 button.green:active {
-  background-color: #89d205;
+  background-color: #09b52c;
   color: #ffffff;
 }
 
@@ -84,7 +84,7 @@ button.green:active {
 }
 
 .green {
-  color: #89d205;
+  color: #09b52c;
 }
 
 .card {
@@ -117,7 +117,7 @@ button.green:active {
   }
 
   a.green:hover {
-    color: #89d205;
+    color: #09b52c;
   }
 
   button {

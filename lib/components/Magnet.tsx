@@ -29,7 +29,6 @@ const Magnet: React.FC<MagnetProps> = ({
 
   const handleMouseLeave = useCallback(reset, []);
 
-  console.log(children, props);
   return Children.map(children, (child) =>
     cloneElement(child, {
       onMouseEnter: handleMouseEnter,
