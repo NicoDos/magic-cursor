@@ -1,6 +1,6 @@
 {
   "name": "react-magic-cursor",
-  "version": "0.0.32",
+  "version": "0.0.35",
   "description": "A cursor that follow your mouse and adapt base on the hovered element.",
   "author": "Nicolas Sandron <nicolas.sandron@gmail.com>",
   "homepage": "https://github.com/NicoDos/magic-cursor#readme",

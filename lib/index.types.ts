@@ -1,12 +1,19 @@
-import { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
+import { HTMLAttributes, ReactNode } from "react";
 
-export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface LinkProps extends HTMLAttributes<HTMLSpanElement> {
   children: ReactNode;
   color?: string;
 }
 
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends HTMLAttributes<HTMLSpanElement> {
   children: ReactNode;
+  color?: string;
+  outline?: number;
+}
+
+export interface MagnetProps extends HTMLAttributes<HTMLElement> {
+  children: ReactNode;
+  type?: "outline" | "underline";
   color?: string;
   outline?: number;
 }

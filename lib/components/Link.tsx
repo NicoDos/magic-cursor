@@ -10,20 +10,20 @@ const Link: React.FC<LinkProps> = ({
 }) => {
   const { underlineElement, reset } = useContext(CursorContext);
 
-  const handleMouseEnter = useCallback((e: MouseEvent<HTMLAnchorElement>) => {
+  const handleMouseEnter = useCallback((e: MouseEvent<HTMLSpanElement>) => {
     underlineElement(e.currentTarget, color);
   }, []);
 
   const handleMouseLeave = useCallback(reset, []);
 
   return (
-    <a
+    <span
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       {...props}
     >
       {children}
-    </a>
+    </span>
   );
 };
 

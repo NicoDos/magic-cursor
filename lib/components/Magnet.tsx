@@ -1,18 +1,21 @@
 import React, { MouseEvent, useCallback, useContext } from "react";
 
 import { CursorContext } from "../contexts/CursorContext";
-import type { ButtonProps } from "../index.types";
+import type { MagnetProps } from "../index.types";
 
-const Button: React.FC<ButtonProps> = ({
+const Magnet: React.FC<MagnetProps> = ({
   children,
+  type = "outline",
   color = "#000000",
   outline = 0,
   ...props
 }) => {
-  const { outlineElement, reset } = useContext(CursorContext);
+  const { outlineElement, underlineElement, reset } = useContext(CursorContext);
   const handleMouseEnter = useCallback(
-    (e: MouseEvent<HTMLSpanElement>) => {
-      outlineElement(e.currentTarget, color, outline);
+    (e: MouseEvent<HTMLElement>) => {
+      type === "outline"
+        ? outlineElement(e.currentTarget, color, outline)
+        : underlineElement(e.currentTarget, color);
     },
     [children]
   );
@@ -20,14 +23,14 @@ const Button: React.FC<ButtonProps> = ({
   const handleMouseLeave = useCallback(reset, []);
 
   return (
-    <button
+    <span
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       {...props}
     >
       {children}
-    </button>
+    </span>
   );
 };
 
-export default Button;
+export default Magnet;
