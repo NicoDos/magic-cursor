@@ -47,19 +47,26 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #ff0066;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
 
 .card {
   padding: 10px;
 }
+
 .card div {
   padding: 10px;
+}
+
+.cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  margin-top: -1px;
+  margin-left: -1px;
+  border-radius: 9999px;
+  border: 1px solid #000000;
+  pointer-events: none;
+  display: flex;
 }
 
 @media (prefers-color-scheme: light) {
@@ -73,17 +80,8 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
 
-.cursor {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 50;
-  margin-top: -1px;
-  margin-left: -1px;
-  border-radius: 9999px;
-  border: 1px solid #ff0066;
-  pointer-events: none;
-  display: flex;
+  .cursor {
+    border: 1px solid #ffffff;
+  }
 }

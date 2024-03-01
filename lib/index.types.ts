@@ -8,6 +8,7 @@ export interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   color?: string;
+  outline?: number;
 }
 
 export interface CursorProviderProps {
@@ -15,22 +16,14 @@ export interface CursorProviderProps {
 }
 
 export interface ICursorContext {
-  cursorX: number;
-  cursorY: number;
-  cursorWidth: number;
-  cursorHeight: number;
-  cursorBorderColor: string;
-  cursorBorderWidth: number;
-  cursorBorderRadius: number;
-  outlineElementWithCursor: (
-    e: EventTarget,
-    color?: string,
-    radius?: string
-  ) => void;
-  underlineElementWithCursor: (
-    e: EventTarget,
-    color?: string,
-    radius?: string
-  ) => void;
-  resetCursor: () => void;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  borderColor: string;
+  borderWidth: number;
+  borderRadius: number;
+  outlineElement: (e: EventTarget, color?: string, outline?: number) => void;
+  underlineElement: (e: EventTarget, color?: string) => void;
+  reset: () => void;
 }

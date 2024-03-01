@@ -1,7 +1,6 @@
+import React from "react";
 import "./App.css";
-import { Cursor } from "components/Cursor";
-import { Button } from "components/Button";
-import { Link } from "components/Link";
+import { Cursor, Button, Link } from "../../lib";
 
 function App() {
   return (

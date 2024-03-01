@@ -6,6 +6,8 @@ export function useFollowPointer() {
   const { scrollY } = useScroll();
 
   useEffect(() => {
+    /* if (typeof window === "undefined") return; */
+
     const handlePointerMove = ({ clientX, clientY }: MouseEvent) => {
       setPoint({ x: clientX, y: clientY + scrollY.get() });
     };
