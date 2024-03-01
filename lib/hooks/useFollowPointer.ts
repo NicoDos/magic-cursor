@@ -1,21 +1,19 @@
-import { useScroll } from "framer-motion";
 import { useState, useEffect } from "react";
+import { useWindowScroll } from "./useWindowScroll";
 
 export function useFollowPointer() {
   const [point, setPoint] = useState({ x: 0, y: 0 });
-  const { scrollY } = useScroll();
+  const { scrollX, scrollY } = useWindowScroll();
 
   useEffect(() => {
-    /* if (typeof window === "undefined") return; */
-
     const handlePointerMove = ({ clientX, clientY }: MouseEvent) => {
-      setPoint({ x: clientX, y: clientY + scrollY.get() });
+      setPoint({ x: clientX + scrollX, y: clientY + scrollY });
     };
 
     window.addEventListener("pointermove", handlePointerMove);
 
     return () => window.removeEventListener("pointermove", handlePointerMove);
-  }, [scrollY]);
+  }, [scrollX, scrollY]);
 
   return point;
 }

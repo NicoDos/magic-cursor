@@ -1,4 +1,4 @@
-import { HTMLAttributes, ReactNode } from "react";
+import { HTMLAttributes, ReactElement, ReactNode } from "react";
 
 export interface LinkProps extends HTMLAttributes<HTMLSpanElement> {
   children: ReactNode;
@@ -12,7 +12,7 @@ export interface ButtonProps extends HTMLAttributes<HTMLSpanElement> {
 }
 
 export interface MagnetProps extends HTMLAttributes<HTMLElement> {
-  children: ReactNode;
+  children: ReactElement;
   type?: "outline" | "underline";
   color?: string;
   outline?: number;
@@ -33,4 +33,13 @@ export interface ICursorContext {
   outlineElement: (e: EventTarget, color?: string, outline?: number) => void;
   underlineElement: (e: EventTarget, color?: string) => void;
   reset: () => void;
+}
+
+export interface AnimatedCursorCoordinates {
+  x: number;
+  y: number;
+}
+export interface AnimatedCursorSize {
+  width: number;
+  height: number;
 }

@@ -19,6 +19,7 @@ a {
   text-decoration: inherit;
   cursor: pointer;
 }
+
 a:hover {
   color: #ff0066;
 }
@@ -36,6 +37,10 @@ h1 {
   line-height: 1.1;
 }
 
+h2 {
+  margin: 0;
+}
+
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -48,6 +53,14 @@ button {
   transition: border-color 0.25s;
 }
 
+button:hover {
+  background-color: #ffdeeb;
+}
+
+button:active {
+  background-color: #ff0066;
+}
+
 .card {
   padding: 10px;
 }
@@ -56,7 +69,15 @@ button {
   padding: 10px;
 }
 
-.cursor {
+.card-example {
+  text-align: left;
+  padding: 20px !important;
+  border: 1px solid #cccccc;
+  border-radius: 20px;
+}
+
+.cursor,
+.cursorr {
   position: absolute;
   top: 0;
   left: 0;
@@ -67,6 +88,7 @@ button {
   border: 1px solid #000000;
   pointer-events: none;
   display: flex;
+  transition: height 0.3s ease-in-out, width 0.3s ease-in-out;
 }
 
 @media (prefers-color-scheme: light) {

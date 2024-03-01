@@ -1,4 +1,10 @@
-import React, { MouseEvent, useCallback, useContext } from "react";
+import React, {
+  MouseEvent,
+  useCallback,
+  useContext,
+  Children,
+  cloneElement,
+} from "react";
 
 import { CursorContext } from "../contexts/CursorContext";
 import type { MagnetProps } from "../index.types";
@@ -22,14 +28,12 @@ const Magnet: React.FC<MagnetProps> = ({
 
   const handleMouseLeave = useCallback(reset, []);
 
-  return (
-    <span
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      {...props}
-    >
-      {children}
-    </span>
+  return Children.map(children, (child) =>
+    cloneElement(child, {
+      onMouseEnter: handleMouseEnter,
+      onMouseLeave: handleMouseLeave,
+      ...props,
+    })
   );
 };
 
