@@ -14,7 +14,7 @@ const CursorProvider: React.FC<CursorProviderProps> = ({ children }) => {
   const outlineElement = useCallback(
     (e: HTMLButtonElement, color = "#000000", outline = 0) => {
       const rect: DOMRect = e.getBoundingClientRect();
-      const radius = +getComputedStyle(e).borderRadius.replace("px", "") + 2;
+      const radius = +getComputedStyle(e).borderRadius.replace("px", "") + 1;
       setBorderRadius(radius);
       setX(rect.x);
       setY(rect.y + window.scrollY);

@@ -4,6 +4,7 @@ import App from "./App";
 import { CursorProvider } from "../../lib";
 
 import "./index.css";
+import "./cursor.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

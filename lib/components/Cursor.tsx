@@ -31,7 +31,6 @@ const Cursor: React.FC<any> = () => {
     height,
   });
 
-  // Outer Cursor Animation Delay
   const animateOuterCursor = useCallback(
     (time: number) => {
       if (previousTimeRef.current !== undefined) {
@@ -52,10 +51,9 @@ const Cursor: React.FC<any> = () => {
       previousTimeRef.current = time;
       requestRef.current = requestAnimationFrame(animateOuterCursor);
     },
-    [requestRef] // eslint-disable-line
+    [requestRef]
   );
 
-  // Outer cursor RAF setup / cleanup
   useEffect(() => {
     requestRef.current = requestAnimationFrame(animateOuterCursor);
     return () => {
@@ -67,9 +65,7 @@ const Cursor: React.FC<any> = () => {
 
   useEffect(() => {
     if (!cursorRef.current) return;
-    /* cursorRef.current.style.transform = `translateX(${
-      x !== 0 ? x : pointerX
-    }px) translateY(${y || pointerY}px) translateZ(0px)`; */
+
     setCoords({ x: x !== 0 ? x : pointerX, y: y || pointerY });
     setSize({ width, height });
     endX.current = x !== 0 ? x : pointerX;
@@ -92,29 +88,7 @@ const Cursor: React.FC<any> = () => {
     borderRadius,
   ]);
 
-  return (
-    <>
-      <div className="cursorr" ref={cursorRef} />
-      {/* <motion.div
-        className="cursor"
-        animate={{
-          x: x !== 0 ? x : pointerX,
-          y: y || pointerY,
-          width: width,
-          height: height,
-          borderColor: borderColor,
-          borderWidth: borderWidth,
-          borderRadius: borderRadius,
-          transition: {
-            type: "spring",
-            damping: 50,
-            stiffness: 500,
-            restDelta: 1,
-          },
-        }}
-      /> */}
-    </>
-  );
+  return <div className="cursor" ref={cursorRef} />;
 };
 
 export default Cursor;

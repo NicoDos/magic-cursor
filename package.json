@@ -1,7 +1,7 @@
 {
   "name": "react-magic-cursor",
-  "version": "0.0.35",
-  "description": "A cursor that follow your mouse and adapt base on the hovered element.",
+  "version": "0.0.12",
+  "description": "A cursor that follows your mouse and adapt its size and shape based on the hovered element.",
   "author": "Nicolas Sandron <nicolas.sandron@gmail.com>",
   "homepage": "https://github.com/NicoDos/magic-cursor#readme",
   "main": "dist/index.js",
@@ -25,7 +25,7 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "prepublishOnly": "npm run build:lib"
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@types/react": "^18.2.56",

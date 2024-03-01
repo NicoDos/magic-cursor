@@ -16,6 +16,7 @@ export interface MagnetProps extends HTMLAttributes<HTMLElement> {
   type?: "outline" | "underline";
   color?: string;
   outline?: number;
+  className?: string;
 }
 
 export interface CursorProviderProps {

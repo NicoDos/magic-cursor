@@ -14,6 +14,7 @@ const Magnet: React.FC<MagnetProps> = ({
   type = "outline",
   color = "#000000",
   outline = 0,
+  className,
   ...props
 }) => {
   const { outlineElement, underlineElement, reset } = useContext(CursorContext);
@@ -28,10 +29,12 @@ const Magnet: React.FC<MagnetProps> = ({
 
   const handleMouseLeave = useCallback(reset, []);
 
+  console.log(children, props);
   return Children.map(children, (child) =>
     cloneElement(child, {
       onMouseEnter: handleMouseEnter,
       onMouseLeave: handleMouseLeave,
+      className: `${className} ${child.props.className}`,
       ...props,
     })
   );
