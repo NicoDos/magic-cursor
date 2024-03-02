@@ -42,10 +42,11 @@ In order to interact with the elements, you need to englobe them with the `<Magn
 
 ## Props
 
-| Prop    | Type   | Description          | Default   |
-| ------- | ------ | -------------------- | --------- |
-| `type`  | string | outline or underline | `outline` |
-| `color` | string | hex value            | `#000000` |
+| Prop     | Type   | Description          | Default   |
+| -------- | ------ | -------------------- | --------- |
+| `type`   | string | outline or underline | `outline` |
+| `offset` | string | number               | `0`       |
+| `color`  | string | hex value            | `#000000` |
 
 `Magnet` takes a prop `type` which can be either `outline` or `underline`.
 It also takes a prop `color` which need to be a HEX Color.

@@ -1,15 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { CursorProvider } from "../../lib";
+import { MagicCursor, MagicCursorProvider } from "../../lib";
 
 import "./index.css";
-import "./cursor.css";
+import "../../lib/index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <CursorProvider>
+    <MagicCursorProvider thickness={2}>
+      <MagicCursor />
       <App />
-    </CursorProvider>
+    </MagicCursorProvider>
   </React.StrictMode>
 );

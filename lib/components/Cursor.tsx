@@ -7,61 +7,59 @@ import React, {
   useState,
 } from "react";
 import { CursorContext } from "../contexts/CursorContext";
-import { AnimatedCursorCoordinates, AnimatedCursorSize } from "../index.types";
+import { CursorProps, CursorCoordinates, CursorSize } from "../index.types";
 
 const trailingSpeed = 8;
 
-const Cursor: React.FC<any> = () => {
+const Cursor: React.FC<CursorProps> = () => {
+  const { x, y, height, width, borderColor, borderWidth, borderRadius } =
+    useContext(CursorContext);
   const endX = useRef(0);
   const endY = useRef(0);
   const endWidth = useRef(0);
   const endHeight = useRef(0);
-  const requestRef = useRef<number | null>(null);
+  const requestAnimationRef = useRef<number | null>(null);
   const previousTimeRef = useRef<number | null>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
-  const { x, y, height, width, borderColor, borderWidth, borderRadius } =
-    useContext(CursorContext);
   const { x: pointerX, y: pointerY } = useFollowPointer();
-  const [coords, setCoords] = useState<AnimatedCursorCoordinates>({
+  const [coords, setCoords] = useState<CursorCoordinates>({
     x: pointerX,
     y: pointerY,
   });
-  const [size, setSize] = useState<AnimatedCursorSize>({
+  const [size, setSize] = useState<CursorSize>({
     width,
     height,
   });
 
-  const animateOuterCursor = useCallback(
+  const animateCursor = useCallback(
     (time: number) => {
-      if (previousTimeRef.current !== undefined) {
+      if (previousTimeRef.current) {
         coords.x += (endX.current - coords.x) / trailingSpeed;
         coords.y += (endY.current - coords.y) / trailingSpeed;
-
         size.width += endWidth.current - size.width;
         size.height += endHeight.current - size.height;
 
-        if (cursorRef.current !== null) {
+        if (cursorRef.current) {
           cursorRef.current.style.top = `${coords.y}px`;
           cursorRef.current.style.left = `${coords.x}px`;
-
           cursorRef.current.style.width = `${size.width}px`;
           cursorRef.current.style.height = `${size.height}px`;
         }
       }
       previousTimeRef.current = time;
-      requestRef.current = requestAnimationFrame(animateOuterCursor);
+      requestAnimationRef.current = requestAnimationFrame(animateCursor);
     },
-    [requestRef]
+    [requestAnimationRef]
   );
 
   useEffect(() => {
-    requestRef.current = requestAnimationFrame(animateOuterCursor);
+    requestAnimationRef.current = requestAnimationFrame(animateCursor);
     return () => {
-      if (requestRef.current !== null) {
-        cancelAnimationFrame(requestRef.current);
+      if (requestAnimationRef.current) {
+        cancelAnimationFrame(requestAnimationRef.current);
       }
     };
-  }, [animateOuterCursor]);
+  }, [animateCursor]);
 
   useEffect(() => {
     if (!cursorRef.current) return;

@@ -2,38 +2,53 @@ import React, { useCallback, useState } from "react";
 import { CursorContext } from "../contexts/CursorContext";
 import type { CursorProviderProps } from "../index.types";
 
-const CursorProvider: React.FC<CursorProviderProps> = ({ children }) => {
+const CursorProvider: React.FC<CursorProviderProps> = ({
+  thickness = 1,
+  children,
+}) => {
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   const [height, setHeight] = useState(30);
   const [width, setWidth] = useState(30);
   const [borderColor, setBorderColor] = useState("#000000");
-  const [borderWidth, setBorderWidth] = useState(1);
+  const [borderWidth, setBorderWidth] = useState(thickness);
   const [borderRadius, setBorderRadius] = useState(9999);
 
   const outlineElement = useCallback(
-    (e: HTMLButtonElement, color = "#000000", outline = 0) => {
-      const rect: DOMRect = e.getBoundingClientRect();
+    (e: HTMLButtonElement, color = "#000000", offset = 0) => {
+      const element: DOMRect = e.getBoundingClientRect();
       const radius = +getComputedStyle(e).borderRadius.replace("px", "") + 1;
-      setBorderRadius(radius);
-      setX(rect.x);
-      setY(rect.y + window.scrollY);
-      setHeight(rect.height + outline);
-      setWidth(rect.width + outline);
+      setBorderRadius(radius + thickness + offset / 3.14);
+      setX(
+        element.x +
+          window.scrollX -
+          (offset ? offset / 2 : offset) +
+          thickness / 2 -
+          1
+      );
+      setY(
+        element.y +
+          window.scrollY -
+          (offset ? offset / 2 : offset) +
+          thickness / 2 -
+          1
+      );
+      setHeight(element.height + offset - thickness);
+      setWidth(element.width + offset - thickness);
       setBorderColor(color);
     },
     [children]
   );
 
   const underlineElement = useCallback(
-    (e: HTMLButtonElement, color = "#000000") => {
-      const rect: DOMRect = e.getBoundingClientRect();
-      setX(rect.x);
-      setY(rect.y + rect.height + window.scrollY + 10);
+    (e: HTMLButtonElement, color = "#000000", offset = 0) => {
+      const element: DOMRect = e.getBoundingClientRect();
+      setX(element.x + window.scrollX);
+      setY(element.y + element.height + window.scrollY + offset || 10);
       setHeight(0);
-      setWidth(rect.width);
+      setWidth(element.width);
       setBorderColor(color);
-      setBorderWidth(0.5);
+      setBorderWidth(thickness / 2);
     },
     []
   );
@@ -45,7 +60,7 @@ const CursorProvider: React.FC<CursorProviderProps> = ({ children }) => {
     setX(0);
     setY(0);
     setBorderColor("#000000");
-    setBorderWidth(1);
+    setBorderWidth(thickness);
   }, []);
 
   const value = {

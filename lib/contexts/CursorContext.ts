@@ -7,7 +7,7 @@ export const CursorContext = createContext<ICursorContext>({
   width: 30,
   height: 30,
   borderColor: "#000000",
-  borderWidth: 30,
+  borderWidth: 1,
   borderRadius: 9999,
   outlineElement: (e) => e,
   underlineElement: (e) => e,

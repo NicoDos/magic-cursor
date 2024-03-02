@@ -1,7 +1,7 @@
-import Button from "./components/Button";
-import Link from "./components/Link";
-import Magnet from "./components/Magnet";
-import Cursor from "./components/Cursor";
-import CursorProvider from "./providers/CursorProvider";
+import MagicElement from "./components/Element";
+import MagicCursor from "./components/Cursor";
+import MagicCursorProvider from "./providers/CursorProvider";
 
-export { Button, Link, Magnet, Cursor, CursorProvider };
+import "./index.css";
+
+export { MagicElement, MagicCursor, MagicCursorProvider };

@@ -13,6 +13,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
 .mx-4 {
   margin-left: 1rem;
   margin-right: 1rem;
@@ -87,12 +101,8 @@ button.green:active {
   color: #09b52c;
 }
 
-.card {
-  padding: 10px;
-}
-
-.card div {
-  padding: 10px;
+.m-4 {
+  margin: 20px;
 }
 
 .card-example {
@@ -122,9 +132,5 @@ button.green:active {
 
   button {
     background-color: #f9f9f9;
-  }
-
-  .cursor {
-    border: 1px solid #ffffff;
   }
 }

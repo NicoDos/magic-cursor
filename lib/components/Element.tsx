@@ -7,13 +7,13 @@ import React, {
 } from "react";
 
 import { CursorContext } from "../contexts/CursorContext";
-import type { MagnetProps } from "../index.types";
+import type { ElementProps } from "../index.types";
 
-const Magnet: React.FC<MagnetProps> = ({
+const Element: React.FC<ElementProps> = ({
   children,
   type = "outline",
   color = "#000000",
-  outline = 0,
+  offset = 0,
   className,
   ...props
 }) => {
@@ -21,7 +21,7 @@ const Magnet: React.FC<MagnetProps> = ({
   const handleMouseEnter = useCallback(
     (e: MouseEvent<HTMLElement>) => {
       type === "outline"
-        ? outlineElement(e.currentTarget, color, outline)
+        ? outlineElement(e.currentTarget, color, offset)
         : underlineElement(e.currentTarget, color);
     },
     [children]
@@ -39,4 +39,4 @@ const Magnet: React.FC<MagnetProps> = ({
   );
 };
 
-export default Magnet;
+export default Element;

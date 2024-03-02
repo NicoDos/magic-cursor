@@ -1,26 +1,18 @@
 import { HTMLAttributes, ReactElement, ReactNode } from "react";
 
-export interface LinkProps extends HTMLAttributes<HTMLSpanElement> {
-  children: ReactNode;
-  color?: string;
-}
-
-export interface ButtonProps extends HTMLAttributes<HTMLSpanElement> {
-  children: ReactNode;
-  color?: string;
-  outline?: number;
-}
-
-export interface MagnetProps extends HTMLAttributes<HTMLElement> {
-  children: ReactElement;
-  type?: "outline" | "underline";
-  color?: string;
-  outline?: number;
-  className?: string;
-}
+export interface CursorProps {}
 
 export interface CursorProviderProps {
   children: ReactNode;
+  thickness?: number;
+}
+
+export interface ElementProps extends HTMLAttributes<HTMLElement> {
+  children: ReactElement;
+  type?: "outline" | "underline";
+  color?: string;
+  offset?: number;
+  className?: string;
 }
 
 export interface ICursorContext {
@@ -36,11 +28,11 @@ export interface ICursorContext {
   reset: () => void;
 }
 
-export interface AnimatedCursorCoordinates {
+export interface CursorCoordinates {
   x: number;
   y: number;
 }
-export interface AnimatedCursorSize {
+export interface CursorSize {
   width: number;
   height: number;
 }

@@ -1,71 +1,84 @@
 import React from "react";
-import { Cursor, Button, Link, Magnet } from "../../lib";
-
-import "./App.css";
+import { MagicElement } from "../../lib";
 
 const App: React.FC<any> = () => {
   return (
     <div className="example">
-      <Cursor />
       <h1>Magic Cursor 🪄</h1>
       <i>
         A cursor that follows your mouse and adapt its size and shape
         <br /> based on the hovered element.
       </i>
-      <div className="card">
-        <div>
+      <div>
+        <div className="m-4">
           <button>I am a regular button</button>
         </div>
-        <div>
-          <Button color="#FF0066">I am a magic button</Button>
-          <Magnet color="#89d205" className="mx-4">
+        <div className="m-4">
+          <MagicElement color="#FF0066">
+            <button>I am a magic button</button>
+          </MagicElement>
+          <MagicElement color="#89d205" className="mx-4">
             <button className="green">
               I am a <span className="green">green</span> magic button
             </button>
-          </Magnet>
+          </MagicElement>
         </div>
-        <div className="flex gap-4">
-          <div>
-            <div className="card-example">
-              <h2>I am a card</h2>
-              <p>I can be anything</p>
-              <p>But I am just a regular card 😥</p>
-            </div>
+        <div className="flex m-4">
+          <div className="card-example">
+            <h2>Simple card</h2>
+            <p>I can be anything</p>
+            <p>But I am just a regular card 😥</p>
           </div>
           <div>
-            <Magnet color="#FF0066">
+            <MagicElement color="#FF0066">
               <div className="card-example">
-                <h2>I am a magic card</h2>
+                <h2>Magic card</h2>
                 <p>I can be anything</p>
-                <p>If I have a magic magnet</p>
+                <p>But I am a happy magic card 😁</p>
               </div>
-            </Magnet>
+            </MagicElement>
+          </div>
+        </div>
+        <div className="flex">
+          <MagicElement color="#FF0066" offset={-20}>
+            <div className="card-example">
+              <h2>Magic inset card</h2>
+              <p>I can be anything</p>
+              <p>But I am a happy magic card 😁</p>
+            </div>
+          </MagicElement>
+          <div>
+            <MagicElement color="#FF0066" offset={20}>
+              <div className="card-example">
+                <h2>Magic offset card</h2>
+                <p>I can be anything</p>
+                <p>But I am a happy magic card 😁</p>
+              </div>
+            </MagicElement>
           </div>
         </div>
       </div>
-      <div className="card">
-        <div>
+      <div>
+        <div className="m-4">
           <a>I am a regular link</a>
         </div>
-        <div>
-          <p>
-            <Link color="#FF0066">
-              <a href="#">I am a magic link</a>
-            </Link>
-          </p>
-          <Magnet color="#89d205" type="underline">
+        <div className="flex m-4">
+          <MagicElement color="#FF0066" type="underline" className="mx-4">
+            <a href="#">I am a magic link</a>
+          </MagicElement>
+          <MagicElement color="#89d205" type="underline" className="mx-4">
             <a href="#" className="green">
               I am a green magic link
             </a>
-          </Magnet>
+          </MagicElement>
         </div>
       </div>
       <div className="footer">
         <div>
           Get the code on{" "}
-          <Link color="#FF0066">
+          <MagicElement color="#FF0066" type="underline">
             <a href="https://github.com/NicoDos/magic-cursor">Github</a>
-          </Link>
+          </MagicElement>
         </div>
       </div>
     </div>
