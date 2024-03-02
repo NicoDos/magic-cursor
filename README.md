@@ -1,76 +1,99 @@
-# Magic Cursor
+# React Magic Cursor
 
-A cursor that follows your mouse and adapt its size shape and color based on the hovered element.
+<p align="center">
+<img src="https://img.shields.io/badge/license-MIT-green" alt="License" />
+<a href="https://www.npmjs.com/package/react-magic-cursor">
+<img src="https://img.shields.io/npm/v/react-magic-cursor.svg" alt="Build Status" /></a>
+<a href="https://github.com/prettier/prettier">
+<img src="https://img.shields.io/codecov/c/github/nicodos/react-magic-cursor" /></a>
+<a href="https://github.com/prettier/prettier">
+<img src="https://img.shields.io/badge/styled_with-prettier-ff69b4.svg" /></a>
+</p>
 
-There are two behaviours:
+A cursor that follows your mouse and adapt its size, shape and color based on the hovered element.
 
-- The cursor outlines the element
-- The cursor underlines the element
+## Live Demo
 
-## Quickstart
+[See a real life example](https://sweetpotato.fr/)
 
-### Install package from npm
+## Install
 
-`npm i react-magic-cursor`
+Depending on the package manager you are using for your project, use `npm install` or `yarn add` to include react-magic-cursor in your react app.
 
-### Setup
+```bash
+npm install --save react-magic-cursor
+```
+
+```bash
+yarn add react-magic-cursor
+```
+
+## Usage
+
+### Cursor
 
 In your main location, add the CursorProvider and Cursor
 
-```
+```jsx
 import React from "react";
-import { Cursor, CursorProvider } from "react-magic-cursor"
+import { Cursor, CursorProvider } from "react-magic-cursor";
 
-export default function App() {
+const App = () => {
   return (
     <React.StrictMode>
-        <CursorProvider>
-            <div className="App">
-                <Cursor />
-                <Page />
-            </div>
-        </CursorProvider>
-  </React.StrictMode>
+      <CursorProvider thickness={2}>
+        <div className="App">
+          <Cursor />
+          <Page />
+        </div>
+      </CursorProvider>
+    </React.StrictMode>
   );
-}
+};
 ```
+
+#### Options
+
+| Prop        | Type   | Description             | Default |
+| ----------- | ------ | ----------------------- | ------- |
+| `thickness` | number | thickness of the cursor | `1`     |
 
 This will add the cursor that follow the mouse.
-In order to interact with the elements, you need to englobe them with the `<Magnet/>` component.
 
-<br/>
+### Element
 
-## Props
+In order to interact with yours elements, you need to englobe them with the `<Element />` component.
 
-| Prop     | Type   | Description          | Default   |
-| -------- | ------ | -------------------- | --------- |
-| `type`   | string | outline or underline | `outline` |
-| `offset` | string | number               | `0`       |
-| `color`  | string | hex value            | `#000000` |
+```jsx
+import { Element } from "react-magic-cursor"
 
-`Magnet` takes a prop `type` which can be either `outline` or `underline`.
-It also takes a prop `color` which need to be a HEX Color.
-
-```
-import { Magnet } from "react-magic-cursor"
-
-export default function Page() {
+const Page = () => {
   return (
-    <Magnet type="outline" color="#ff0066">
+    <Element type="outline" color="#ff0066" offset={5}>
         <button>
             Click me!
         </button>
-    </Magnet>
+    </Element>
 
-    <Magnet type="underline" color="#ff0066">
+    <Element type="underline" color="#ff0066">
         <a href="#">
             Follow me!
         </a>
-    </Magnet>
+    </Element>
   );
 }
 ```
 
-Commits are of course welcome! 😄
+#### Options
+
+| Prop     | Type   | Description              | Default   |
+| -------- | ------ | ------------------------ | --------- |
+| `type`   | string | `outline` or `underline` | `outline` |
+| `offset` | number | can be negative          | `0`       |
+| `color`  | string | hex value                | `#000000` |
+
+### Contribute
+
+If you have a feature request, please add it as an issue or make a pull request.
 
 Cheers!

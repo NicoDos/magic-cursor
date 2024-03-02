@@ -7,6 +7,6 @@
     "allowSyntheticDefaultImports": true,
     "allowJs": true
   },
-  "include": ["lib"],
+  "include": ["lib", "jest.setup.ts"],
   "exclude": ["node_modules"]
 }
