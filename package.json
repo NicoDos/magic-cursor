@@ -1,6 +1,6 @@
 {
   "name": "react-magic-cursor",
-  "version": "0.0.14",
+  "version": "0.1.0",
   "description": "A cursor that follows your mouse and adapt its size shape and color based on the hovered element.",
   "author": "Nicolas Sandron <nicolas.sandron@gmail.com>",
   "homepage": "https://sweetpotato.fr",
