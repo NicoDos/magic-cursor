@@ -9,6 +9,8 @@ import React, {
 import { CursorContext } from "../contexts/CursorContext";
 import { CursorProps, CursorCoordinates, CursorSize } from "../index.types";
 
+import "./Cursor.css";
+
 const trailingSpeed = 8;
 
 const Cursor: React.FC<CursorProps> = () => {

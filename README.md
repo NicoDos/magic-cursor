@@ -32,21 +32,21 @@ yarn add react-magic-cursor
 
 ### Cursor
 
-In your main location, add the CursorProvider and Cursor
+In your main location, add the MagicCursorProvider and MagicCursor
 
 ```jsx
 import React from "react";
-import { Cursor, CursorProvider } from "react-magic-cursor";
+import { MagicCursor, MagicCursorProvider } from "react-magic-cursor";
 
 const App = () => {
   return (
     <React.StrictMode>
-      <CursorProvider thickness={2}>
+      <MagicCursorProvider thickness={2}>
         <div className="App">
-          <Cursor />
+          <MagicCursor />
           <Page />
         </div>
-      </CursorProvider>
+      </MagicCursorProvider>
     </React.StrictMode>
   );
 };
@@ -62,26 +62,24 @@ This will add the cursor that follow the mouse.
 
 ### Element
 
-In order to interact with yours elements, you need to englobe them with the `<Element />` component.
+In order to interact with yours elements, you need to englobe them with the `<MagicElement />` component.
 
 ```jsx
-import { Element } from "react-magic-cursor"
+import { MagicElement } from "react-magic-cursor";
 
 const Page = () => {
   return (
-    <Element type="outline" color="#ff0066" offset={5}>
-        <button>
-            Click me!
-        </button>
-    </Element>
+    <>
+      <MagicElement type="outline" color="#ff0066" offset={5}>
+        <button>Click me!</button>
+      </MagicElement>
 
-    <Element type="underline" color="#ff0066">
-        <a href="#">
-            Follow me!
-        </a>
-    </Element>
+      <MagicElement type="underline" color="#ff0066">
+        <a href="#">Follow me!</a>
+      </MagicElement>
+    </>
   );
-}
+};
 ```
 
 #### Options

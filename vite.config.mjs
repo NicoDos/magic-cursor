@@ -3,13 +3,14 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 import dts from "vite-plugin-dts";
-import { libInjectCss } from "vite-plugin-lib-inject-css";
+import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
     emptyOutDir: true,
     copyPublicDir: false,
+    cssCodeSplit: true,
     lib: {
       entry: path.resolve(".", "lib/index.ts"),
       name: "react-magic-cursor",
@@ -33,6 +34,6 @@ export default defineConfig({
     }),
     dts({ rollupTypes: true }),
     tsconfigPaths(),
-    libInjectCss(),
+    cssInjectedByJsPlugin(),
   ],
 });
