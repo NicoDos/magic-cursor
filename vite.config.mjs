@@ -4,6 +4,7 @@ import react from "@vitejs/plugin-react";
 import tsconfigPaths from "vite-tsconfig-paths";
 import dts from "vite-plugin-dts";
 import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
+import preserveDirectives from "rollup-plugin-preserve-directives";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -21,6 +22,7 @@ export default defineConfig({
     rollupOptions: {
       external: ["react", "react-dom"],
       output: {
+        banner: "'use client';",
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
@@ -34,6 +36,5 @@ export default defineConfig({
     }),
     dts({ rollupTypes: true }),
     tsconfigPaths(),
-    cssInjectedByJsPlugin(),
   ],
 });

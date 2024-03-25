@@ -1,6 +1,6 @@
 {
   "name": "react-magic-cursor",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A cursor that follows your mouse and adapt its size shape and color based on the hovered element.",
   "author": "Nicolas Sandron <nicolas.sandron@gmail.com>",
   "homepage": "https://sweetpotato.fr",
@@ -24,6 +24,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "pack": "npm pack --pack-destination ~",
     "preview": "vite preview",
     "prepublishOnly": "npm run build",
     "test": "jest --config --coverage=false",
@@ -45,7 +46,6 @@
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "vite": "^5.1.4",
-    "vite-plugin-css-injected-by-js": "^3.4.0",
     "vite-plugin-dts": "^3.7.3",
     "vite-tsconfig-paths": "^4.3.1"
   },
