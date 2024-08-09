@@ -88,7 +88,7 @@ const Cursor: React.FC<CursorProps> = () => {
     borderRadius,
   ]);
 
-  return <div className="cursor" ref={cursorRef} />;
+  return <div id="rmc" className="cursor" ref={cursorRef} />;
 };
 
 export default Cursor;

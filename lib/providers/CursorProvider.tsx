@@ -61,6 +61,8 @@ const CursorProvider: React.FC<CursorProviderProps> = ({
     setY(0);
     setBorderColor("#000000");
     setBorderWidth(thickness);
+
+    document.getElementById("rmc").classList.remove("cursor-hover");
   }, []);
 
   const value = {

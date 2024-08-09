@@ -20,6 +20,7 @@ const Element: React.FC<ElementProps> = ({
   const { outlineElement, underlineElement, reset } = useContext(CursorContext);
   const handleMouseEnter = useCallback(
     (e: MouseEvent<HTMLElement>) => {
+      document.getElementById("rmc").classList.add("cursor-hover");
       type === "outline"
         ? outlineElement(e.currentTarget, color, offset)
         : underlineElement(e.currentTarget, color);
