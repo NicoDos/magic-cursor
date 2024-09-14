@@ -5,13 +5,7 @@
     "es6": true,
     "commonjs": true
   },
-  "plugins": [
-    "@typescript-eslint",
-    "react",
-    "react-hooks",
-    "prettier",
-    "no-relative-import-paths"
-  ],
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "prettier", "no-relative-import-paths"],
 
   "extends": [
     "eslint:recommended",
@@ -42,19 +36,6 @@
       "experimentalObjectRestSpread": true,
       "modules": true
     }
-  },
-  "rules": {
-    "linebreak-style": 0,
-    "no-underscore-dangle": 0,
-    "no-nested-ternary": 0,
-    "prettier/prettier": "error",
-    "react-hooks/exhaustive-deps": "warn",
-    "react/react-in-jsx-scope": "off",
-    "react-hooks/rules-of-hooks": "error",
-    "react/jsx-uses-react": "off",
-    "react/jsx-uses-vars": "error",
-    "react/no-unescaped-entities": 0,
-    "react/prefer-stateless-function": 1
   },
   "globals": {
     "grecaptcha": "readonly"

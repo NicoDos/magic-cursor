@@ -9,21 +9,18 @@ import { DEFAULT_TRAILINGSPEED } from '../constants';
 const Cursor = () => {
   const { cursorRef, x, y, height, width, borderColor, borderWidth, borderRadius } =
     useContext(CursorContext);
+
+  const { x: pointerX, y: pointerY } = useFollowPointer();
+
   const endX = useRef(0);
   const endY = useRef(0);
   const endWidth = useRef(0);
   const endHeight = useRef(0);
   const requestAnimationRef = useRef<number | null>(null);
   const previousTimeRef = useRef<number | null>(null);
-  const { x: pointerX, y: pointerY } = useFollowPointer();
-  const [coords, setCoords] = useState<CursorCoordinates>({
-    x: pointerX,
-    y: pointerY,
-  });
-  const [size, setSize] = useState<CursorSize>({
-    width,
-    height,
-  });
+
+  const [coords, setCoords] = useState<CursorCoordinates>({ x: pointerX, y: pointerY });
+  const [size, setSize] = useState<CursorSize>({ width, height });
 
   const animateCursor = useCallback(
     (time: number) => {
@@ -34,10 +31,12 @@ const Cursor = () => {
         size.height += endHeight.current - size.height;
 
         if (cursorRef.current) {
-          cursorRef.current.style.top = `${coords.y}px`;
-          cursorRef.current.style.left = `${coords.x}px`;
-          cursorRef.current.style.width = `${size.width}px`;
-          cursorRef.current.style.height = `${size.height}px`;
+          Object.assign(cursorRef.current.style, {
+            top: `${coords.y}px`,
+            left: `${coords.x}px`,
+            width: `${size.width}px`,
+            height: `${size.height}px`,
+          });
         }
       }
       previousTimeRef.current = time;
@@ -58,29 +57,24 @@ const Cursor = () => {
   useEffect(() => {
     if (!cursorRef.current) return;
 
-    setCoords({ x: x !== 0 ? x : pointerX, y: y || pointerY });
+    const newX = x !== 0 ? x : pointerX;
+    const newY = y || pointerY;
+    setCoords({ x: newX, y: newY });
     setSize({ width, height });
-    endX.current = x !== 0 ? x : pointerX;
-    endY.current = y || pointerY;
+
+    endX.current = newX;
+    endY.current = newY;
     endWidth.current = width;
     endHeight.current = height;
-    cursorRef.current.style.borderColor = borderColor;
-    cursorRef.current.style.borderWidth = `${borderWidth}px`;
-    cursorRef.current.style.borderRadius = `${borderRadius}px`;
-  }, [
-    cursorRef?.current,
-    pointerX,
-    pointerY,
-    x,
-    y,
-    height,
-    width,
-    borderColor,
-    borderWidth,
-    borderRadius,
-  ]);
 
-  return <div id="rmc" className="cursor" ref={cursorRef} />;
+    Object.assign(cursorRef.current.style, {
+      borderColor,
+      borderWidth: `${borderWidth}px`,
+      borderRadius: `${borderRadius}px`,
+    });
+  }, [cursorRef, pointerX, pointerY, x, y, height, width, borderColor, borderWidth, borderRadius]);
+
+  return <div className="cursor" ref={cursorRef} />;
 };
 
 export default Cursor;

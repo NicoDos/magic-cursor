@@ -1,17 +1,16 @@
 import { useLayoutEffect, useState } from 'react';
 
 export function useWindowScroll() {
-  const [state, setState] = useState({
-    scrollX: 0,
-    scrollY: 0,
+  const [scrollPosition, setScrollPosition] = useState({
+    scrollX: window.scrollX,
+    scrollY: window.scrollY,
   });
 
   useLayoutEffect(() => {
     const handleScroll = () => {
-      setState({ scrollX: window.scrollX, scrollY: window.scrollY });
+      setScrollPosition({ scrollX: window.scrollX, scrollY: window.scrollY });
     };
 
-    handleScroll();
     window.addEventListener('scroll', handleScroll);
 
     return () => {
@@ -19,5 +18,5 @@ export function useWindowScroll() {
     };
   }, []);
 
-  return { ...state };
+  return scrollPosition;
 }

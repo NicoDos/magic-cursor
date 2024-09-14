@@ -1,6 +1,12 @@
 import { createContext } from 'react';
 import type { ICursorContext } from '../index.d';
-import { DEFAULT_COLOR, DEFAULT_HEIGHT, DEFAULT_THICKNESS, DEFAULT_WIDTH } from '../constants';
+import {
+  DEFAULT_COLOR,
+  DEFAULT_HEIGHT,
+  DEFAULT_RADIUS,
+  DEFAULT_THICKNESS,
+  DEFAULT_WIDTH,
+} from '../constants';
 
 export const CursorContext = createContext<ICursorContext>({
   cursorRef: null,
@@ -10,7 +16,7 @@ export const CursorContext = createContext<ICursorContext>({
   height: DEFAULT_HEIGHT,
   borderColor: DEFAULT_COLOR,
   borderWidth: DEFAULT_THICKNESS,
-  borderRadius: 9999,
+  borderRadius: DEFAULT_RADIUS,
   outlineElement: (e) => e,
   underlineElement: (e) => e,
   reset: () => {},

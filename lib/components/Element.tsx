@@ -9,25 +9,35 @@ const Element = ({
   type = DEFAULT_TYPE,
   color = DEFAULT_COLOR,
   offset = DEFAULT_OFFSET,
-  className,
+  className = '',
   ...props
 }: ElementProps) => {
   const { cursorRef, outlineElement, underlineElement, reset } = useContext(CursorContext);
+
   const handleMouseEnter = useCallback(
     (e: MouseEvent<HTMLElement>) => {
-      cursorRef.current.classList.add(HOVER_CLASSNAME);
-      type === DEFAULT_TYPE
-        ? outlineElement(e.currentTarget, color, offset)
-        : underlineElement(e.currentTarget, color);
+      if (cursorRef.current) {
+        cursorRef.current.classList.add(HOVER_CLASSNAME);
+      }
+
+      if (type === DEFAULT_TYPE) {
+        outlineElement(e.currentTarget, color, offset);
+      } else {
+        underlineElement(e.currentTarget, color);
+      }
     },
-    [children]
+    [cursorRef, outlineElement, underlineElement, color, offset, type]
   );
+
+  const handleMouseLeave = useCallback(() => {
+    reset();
+  }, [reset]);
 
   return Children.map(children, (child) =>
     cloneElement(child, {
       onMouseEnter: handleMouseEnter,
-      onMouseLeave: reset,
-      className: `${className} ${child.props.className}`,
+      onMouseLeave: handleMouseLeave,
+      className: `${className} ${child.props.className || ''}`.trim(),
       ...props,
     })
   );
