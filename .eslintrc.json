@@ -5,7 +5,14 @@
     "es6": true,
     "commonjs": true
   },
-  "plugins": ["react", "react-hooks", "prettier"],
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "react-hooks",
+    "prettier",
+    "no-relative-import-paths"
+  ],
+
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
