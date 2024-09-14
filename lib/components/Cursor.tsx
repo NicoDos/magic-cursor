@@ -1,21 +1,13 @@
-import { useFollowPointer } from "../hooks/useFollowPointer";
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { CursorContext } from "../contexts/CursorContext";
-import { CursorProps, CursorCoordinates, CursorSize } from "../index.types";
+import { useFollowPointer } from '../hooks/useFollowPointer';
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { CursorContext } from '../contexts/CursorContext';
+import { CursorCoordinates, CursorSize } from '../index.d';
 
-import "./Cursor.css";
+import '../styles/global.css';
+import { DEFAULT_TRAILINGSPEED } from '../constants';
 
-const trailingSpeed = 8;
-
-const Cursor: React.FC<CursorProps> = () => {
-  const { x, y, height, width, borderColor, borderWidth, borderRadius } =
-    useContext(CursorContext);
+const Cursor = () => {
+  const { x, y, height, width, borderColor, borderWidth, borderRadius } = useContext(CursorContext);
   const endX = useRef(0);
   const endY = useRef(0);
   const endWidth = useRef(0);
@@ -36,8 +28,8 @@ const Cursor: React.FC<CursorProps> = () => {
   const animateCursor = useCallback(
     (time: number) => {
       if (previousTimeRef.current) {
-        coords.x += (endX.current - coords.x) / trailingSpeed;
-        coords.y += (endY.current - coords.y) / trailingSpeed;
+        coords.x += (endX.current - coords.x) / DEFAULT_TRAILINGSPEED;
+        coords.y += (endY.current - coords.y) / DEFAULT_TRAILINGSPEED;
         size.width += endWidth.current - size.width;
         size.height += endHeight.current - size.height;
 

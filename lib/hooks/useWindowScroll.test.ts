@@ -1,12 +1,12 @@
-import { renderHook, fireEvent } from "@testing-library/react";
-import { useWindowScroll } from "/Users/nsandron/Documents/GitHub/magic-cursor/lib/hooks/useWindowScroll";
+import { renderHook, fireEvent } from '@testing-library/react';
+import { useWindowScroll } from '/Users/nsandron/Documents/GitHub/magic-cursor/lib/hooks/useWindowScroll';
 
-describe("useWindowScroll", () => {
+describe('useWindowScroll', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  test("should update scrollX and scrollY when window is scrolled", () => {
+  test('should update scrollX and scrollY when window is scrolled', () => {
     const { result } = renderHook(() => useWindowScroll());
 
     expect(result.current.scrollX).toBe(0);

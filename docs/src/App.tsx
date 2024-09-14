@@ -1,7 +1,7 @@
 import React from "react";
 import { MagicElement } from "../../lib";
 
-const App: React.FC<any> = () => {
+const App = () => {
   return (
     <div className="example">
       <h1>Magic Cursor 🪄</h1>

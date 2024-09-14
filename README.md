@@ -92,6 +92,10 @@ const Page = () => {
 
 ### Contribute
 
+```bash
+npm run dev
+```
+
 If you have a feature request, please add it as an issue or make a pull request.
 
 Cheers!

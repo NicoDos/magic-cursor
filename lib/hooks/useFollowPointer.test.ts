@@ -1,17 +1,17 @@
-import { renderHook, act } from "@testing-library/react";
-import { useFollowPointer } from "./useFollowPointer";
-import { useWindowScroll } from "./useWindowScroll";
+import { renderHook, act } from '@testing-library/react';
+import { useFollowPointer } from './useFollowPointer';
+import { useWindowScroll } from './useWindowScroll';
 
-jest.mock("./useWindowScroll", () => ({
+jest.mock('./useWindowScroll', () => ({
   useWindowScroll: jest.fn(),
 }));
 
-describe("useFollowPointer", () => {
+describe('useFollowPointer', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  test("should update point coordinates when pointer is moved", () => {
+  test('should update point coordinates when pointer is moved', () => {
     const scrollX = 100;
     const scrollY = 200;
     const clientX = 50;
@@ -24,7 +24,7 @@ describe("useFollowPointer", () => {
     expect(result.current).toEqual({ x: 0, y: 0 });
 
     act(() => {
-      window.dispatchEvent(new MouseEvent("pointermove", { clientX, clientY }));
+      window.dispatchEvent(new MouseEvent('pointermove', { clientX, clientY }));
     });
 
     expect(result.current).toEqual({
@@ -33,8 +33,8 @@ describe("useFollowPointer", () => {
     });
   });
 
-  test("should remove event listener on unmount", () => {
-    const removeEventListenerMock = jest.spyOn(window, "removeEventListener");
+  test('should remove event listener on unmount', () => {
+    const removeEventListenerMock = jest.spyOn(window, 'removeEventListener');
 
     (useWindowScroll as jest.Mock).mockReturnValue({ scrollX: 0, scrollY: 0 });
 
@@ -42,9 +42,6 @@ describe("useFollowPointer", () => {
 
     unmount();
 
-    expect(removeEventListenerMock).toHaveBeenCalledWith(
-      "pointermove",
-      expect.any(Function)
-    );
+    expect(removeEventListenerMock).toHaveBeenCalledWith('pointermove', expect.any(Function));
   });
 });

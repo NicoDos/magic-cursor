@@ -1,7 +1,5 @@
 import { HTMLAttributes, ReactElement, ReactNode } from "react";
 
-export interface CursorProps {}
-
 export interface CursorProviderProps {
   children: ReactNode;
   thickness?: number;

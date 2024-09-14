@@ -1,27 +1,22 @@
-import React, {
-  MouseEvent,
-  useCallback,
-  useContext,
-  Children,
-  cloneElement,
-} from "react";
+import React, { MouseEvent, useCallback, useContext, Children, cloneElement } from 'react';
 
-import { CursorContext } from "../contexts/CursorContext";
-import type { ElementProps } from "../index.types";
+import { CursorContext } from '../contexts/CursorContext';
+import type { ElementProps } from '../index.d';
+import { DEFAULT_COLOR, DEFAULT_TYPE } from '../constants';
 
-const Element: React.FC<ElementProps> = ({
+const Element = ({
   children,
-  type = "outline",
-  color = "#000000",
+  type = DEFAULT_TYPE,
+  color = DEFAULT_COLOR,
   offset = 0,
   className,
   ...props
-}) => {
+}: ElementProps) => {
   const { outlineElement, underlineElement, reset } = useContext(CursorContext);
   const handleMouseEnter = useCallback(
     (e: MouseEvent<HTMLElement>) => {
-      document.getElementById("rmc").classList.add("cursor-hover");
-      type === "outline"
+      document.getElementById('rmc').classList.add('cursor-hover');
+      type === DEFAULT_TYPE
         ? outlineElement(e.currentTarget, color, offset)
         : underlineElement(e.currentTarget, color);
     },

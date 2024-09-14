@@ -1,21 +1,22 @@
 import React, { useCallback, useState } from "react";
 import { CursorContext } from "../contexts/CursorContext";
-import type { CursorProviderProps } from "../index.types";
+import type { CursorProviderProps } from "../index.d";
+import { DEFAULT_COLOR, DEFAULT_THICKNESS } from "../constants";
 
-const CursorProvider: React.FC<CursorProviderProps> = ({
-  thickness = 1,
+const CursorProvider = ({
+  thickness = DEFAULT_THICKNESS,
   children,
-}) => {
+}: CursorProviderProps) => {
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   const [height, setHeight] = useState(30);
   const [width, setWidth] = useState(30);
-  const [borderColor, setBorderColor] = useState("#000000");
+  const [borderColor, setBorderColor] = useState(DEFAULT_COLOR);
   const [borderWidth, setBorderWidth] = useState(thickness);
   const [borderRadius, setBorderRadius] = useState(9999);
 
   const outlineElement = useCallback(
-    (e: HTMLButtonElement, color = "#000000", offset = 0) => {
+    (e: HTMLButtonElement, color = DEFAULT_COLOR, offset = 0) => {
       const element: DOMRect = e.getBoundingClientRect();
       const radius = +getComputedStyle(e).borderRadius.replace("px", "") + 1;
       setBorderRadius(radius + thickness + offset / 3.14);
@@ -41,7 +42,7 @@ const CursorProvider: React.FC<CursorProviderProps> = ({
   );
 
   const underlineElement = useCallback(
-    (e: HTMLButtonElement, color = "#000000", offset = 0) => {
+    (e: HTMLButtonElement, color = DEFAULT_COLOR, offset = 0) => {
       const element: DOMRect = e.getBoundingClientRect();
       setX(element.x + window.scrollX);
       setY(element.y + element.height + window.scrollY + offset || 10);
@@ -59,7 +60,7 @@ const CursorProvider: React.FC<CursorProviderProps> = ({
     setWidth(30);
     setX(0);
     setY(0);
-    setBorderColor("#000000");
+    setBorderColor(DEFAULT_COLOR);
     setBorderWidth(thickness);
 
     document.getElementById("rmc").classList.remove("cursor-hover");
