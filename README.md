@@ -35,8 +35,8 @@ yarn add react-magic-cursor
 In your main location, add the MagicCursorProvider and MagicCursor
 
 ```jsx
-import React from "react";
-import { MagicCursor, MagicCursorProvider } from "react-magic-cursor";
+import React from 'react';
+import { MagicCursor, MagicCursorProvider } from 'react-magic-cursor';
 
 const App = () => {
   return (
@@ -65,7 +65,7 @@ This will add the cursor that follow the mouse.
 In order to interact with yours elements, you need to englobe them with the `<MagicElement />` component.
 
 ```jsx
-import { MagicElement } from "react-magic-cursor";
+import { MagicElement } from 'react-magic-cursor';
 
 const Page = () => {
   return (
@@ -92,8 +92,24 @@ const Page = () => {
 
 ### Contribute
 
+- Run the package locally
+
 ```bash
 npm run dev
+```
+
+Visit http://localhost:5173/
+
+- Test the package in another project
+
+```bash
+npm run build && npm run pack
+```
+
+Then in your project's package.json file, add (refer to the current version in `./package.json):
+
+```
+"react-magic-cursor": "~/react-magic-cursor-0.1.5.tgz"
 ```
 
 If you have a feature request, please add it as an issue or make a pull request.
