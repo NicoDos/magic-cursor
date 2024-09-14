@@ -1,4 +1,4 @@
-import { HTMLAttributes, ReactElement, ReactNode } from "react";
+import { HTMLAttributes, MutableRefObject, ReactElement, ReactNode } from 'react';
 
 export interface CursorProviderProps {
   children: ReactNode;
@@ -7,13 +7,14 @@ export interface CursorProviderProps {
 
 export interface ElementProps extends HTMLAttributes<HTMLElement> {
   children: ReactElement;
-  type?: "outline" | "underline";
+  type?: 'outline' | 'underline';
   color?: string;
   offset?: number;
   className?: string;
 }
 
 export interface ICursorContext {
+  cursorRef: MutableRefObject<HTMLDivElement> | null;
   x: number;
   y: number;
   width: number;

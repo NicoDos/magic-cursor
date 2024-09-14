@@ -7,14 +7,14 @@ import '../styles/global.css';
 import { DEFAULT_TRAILINGSPEED } from '../constants';
 
 const Cursor = () => {
-  const { x, y, height, width, borderColor, borderWidth, borderRadius } = useContext(CursorContext);
+  const { cursorRef, x, y, height, width, borderColor, borderWidth, borderRadius } =
+    useContext(CursorContext);
   const endX = useRef(0);
   const endY = useRef(0);
   const endWidth = useRef(0);
   const endHeight = useRef(0);
   const requestAnimationRef = useRef<number | null>(null);
   const previousTimeRef = useRef<number | null>(null);
-  const cursorRef = useRef<HTMLDivElement>(null);
   const { x: pointerX, y: pointerY } = useFollowPointer();
   const [coords, setCoords] = useState<CursorCoordinates>({
     x: pointerX,

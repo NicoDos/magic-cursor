@@ -2,20 +2,20 @@ import React, { MouseEvent, useCallback, useContext, Children, cloneElement } fr
 
 import { CursorContext } from '../contexts/CursorContext';
 import type { ElementProps } from '../index.d';
-import { DEFAULT_COLOR, DEFAULT_TYPE } from '../constants';
+import { DEFAULT_COLOR, DEFAULT_OFFSET, DEFAULT_TYPE, HOVER_CLASSNAME } from '../constants';
 
 const Element = ({
   children,
   type = DEFAULT_TYPE,
   color = DEFAULT_COLOR,
-  offset = 0,
+  offset = DEFAULT_OFFSET,
   className,
   ...props
 }: ElementProps) => {
-  const { outlineElement, underlineElement, reset } = useContext(CursorContext);
+  const { cursorRef, outlineElement, underlineElement, reset } = useContext(CursorContext);
   const handleMouseEnter = useCallback(
     (e: MouseEvent<HTMLElement>) => {
-      document.getElementById('rmc').classList.add('cursor-hover');
+      cursorRef.current.classList.add(HOVER_CLASSNAME);
       type === DEFAULT_TYPE
         ? outlineElement(e.currentTarget, color, offset)
         : underlineElement(e.currentTarget, color);
@@ -23,12 +23,10 @@ const Element = ({
     [children]
   );
 
-  const handleMouseLeave = useCallback(reset, []);
-
   return Children.map(children, (child) =>
     cloneElement(child, {
       onMouseEnter: handleMouseEnter,
-      onMouseLeave: handleMouseLeave,
+      onMouseLeave: reset,
       className: `${className} ${child.props.className}`,
       ...props,
     })
