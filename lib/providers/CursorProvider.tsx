@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import type { CursorProviderProps } from '../index.d';
 import {
   DEFAULT_COLOR,
@@ -100,18 +100,24 @@ const CursorProvider = ({ thickness = DEFAULT_THICKNESS, children }: CursorProvi
     }
   }, [thickness]);
 
-  const dataValue = {
-    cursorRef,
-    cursorPositions,
-    cursorSizes,
-    cursorStyles,
-  };
+  const dataValue = useMemo(
+    () => ({
+      cursorRef,
+      cursorPositions,
+      cursorSizes,
+      cursorStyles,
+    }),
+    [cursorRef, cursorPositions, cursorSizes, cursorStyles]
+  );
 
-  const apiValue = {
-    outlineElement,
-    underlineElement,
-    reset,
-  };
+  const apiValue = useMemo(
+    () => ({
+      outlineElement,
+      underlineElement,
+      reset,
+    }),
+    [outlineElement, underlineElement, reset]
+  );
 
   return (
     <DataCursorContext.Provider value={dataValue}>
