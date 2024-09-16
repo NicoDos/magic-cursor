@@ -7,8 +7,7 @@ import '../styles/global.css';
 import { DEFAULT_TRAILINGSPEED } from '../constants';
 
 const Cursor = () => {
-  const { cursorRef, x, y, height, width, borderColor, borderWidth, borderRadius } =
-    useDataCursor();
+  const { cursorRef, x, y, height, width, cursorStyles } = useDataCursor();
 
   const { x: pointerX, y: pointerY } = useFollowPointer();
 
@@ -68,11 +67,11 @@ const Cursor = () => {
     endHeight.current = height;
 
     Object.assign(cursorRef.current.style, {
-      borderColor,
-      borderWidth: `${borderWidth}px`,
-      borderRadius: `${borderRadius}px`,
+      ...cursorStyles,
+      borderWidth: `${cursorStyles.borderWidth}px`,
+      borderRadius: `${cursorStyles.borderRadius}px`,
     });
-  }, [cursorRef, pointerX, pointerY, x, y, height, width, borderColor, borderWidth, borderRadius]);
+  }, [cursorRef, pointerX, pointerY, x, y, height, width, cursorStyles]);
 
   return <div className="cursor" ref={cursorRef} />;
 };

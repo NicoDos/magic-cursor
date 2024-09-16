@@ -14,9 +14,11 @@ export const DataCursorContext = createContext<IDataCursorContext>({
   y: 0,
   width: DEFAULT_WIDTH,
   height: DEFAULT_HEIGHT,
-  borderColor: DEFAULT_COLOR,
-  borderWidth: DEFAULT_THICKNESS,
-  borderRadius: DEFAULT_RADIUS,
+  cursorStyles: {
+    borderColor: DEFAULT_COLOR,
+    borderWidth: DEFAULT_THICKNESS,
+    borderRadius: DEFAULT_RADIUS,
+  },
 });
 
 export const ApiCursorContext = createContext<IApiCursorContext>({

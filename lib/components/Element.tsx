@@ -1,8 +1,8 @@
 import React, { MouseEvent, useCallback, Children, cloneElement } from 'react';
 
-import { useApiCursor, useDataCursor } from '../contexts/CursorContext';
+import { useApiCursor } from '../contexts/CursorContext';
 import type { ElementProps } from '../index.d';
-import { DEFAULT_COLOR, DEFAULT_OFFSET, DEFAULT_TYPE, HOVER_CLASSNAME } from '../constants';
+import { DEFAULT_COLOR, DEFAULT_OFFSET, DEFAULT_TYPE } from '../constants';
 
 const Element = ({
   children,
@@ -12,22 +12,22 @@ const Element = ({
   className = '',
   ...props
 }: ElementProps) => {
-  const { cursorRef } = useDataCursor();
   const { outlineElement, underlineElement, reset } = useApiCursor();
 
   const handleMouseEnter = useCallback(
     (e: MouseEvent<HTMLElement>) => {
-      if (cursorRef.current) {
-        cursorRef.current.classList.add(HOVER_CLASSNAME);
-      }
+      if (!e.currentTarget) return;
+
+      const element = e.currentTarget.getBoundingClientRect();
+      const elementStyles = getComputedStyle(e.currentTarget);
 
       if (type === DEFAULT_TYPE) {
-        outlineElement(e.currentTarget, color, offset);
+        outlineElement(element, elementStyles, color, offset);
       } else {
-        underlineElement(e.currentTarget, color);
+        underlineElement(element, color);
       }
     },
-    [cursorRef, outlineElement, underlineElement, color, offset, type]
+    [outlineElement, underlineElement, color, offset, type]
   );
 
   const handleMouseLeave = useCallback(() => {

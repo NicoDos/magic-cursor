@@ -40,9 +40,9 @@ describe('CursorProvider', () => {
     expect(contextValues.y).toBe(0);
     expect(contextValues.height).toBe(DEFAULT_HEIGHT);
     expect(contextValues.width).toBe(DEFAULT_WIDTH);
-    expect(contextValues.borderColor).toBe(DEFAULT_COLOR);
-    expect(contextValues.borderWidth).toBe(DEFAULT_THICKNESS);
-    expect(contextValues.borderRadius).toBe(DEFAULT_RADIUS);
+    expect(contextValues.cursorStyles.borderColor).toBe(DEFAULT_COLOR);
+    expect(contextValues.cursorStyles.borderWidth).toBe(DEFAULT_THICKNESS);
+    expect(contextValues.cursorStyles.borderRadius).toBe(DEFAULT_RADIUS);
   });
 
   it('updates cursor context values when outlineElement is called', () => {
@@ -70,7 +70,7 @@ describe('CursorProvider', () => {
     expect(contextValues.y).not.toBe(0);
     expect(contextValues.height).not.toBe(DEFAULT_HEIGHT);
     expect(contextValues.width).not.toBe(DEFAULT_WIDTH);
-    expect(contextValues.borderColor).toBe(DEFAULT_COLOR);
+    expect(contextValues.cursorStyles.borderColor).toBe(DEFAULT_COLOR);
   });
 
   it('resets cursor context values when reset is called', () => {
@@ -99,8 +99,8 @@ describe('CursorProvider', () => {
     expect(contextValues.y).toBe(0);
     expect(contextValues.height).toBe(DEFAULT_HEIGHT);
     expect(contextValues.width).toBe(DEFAULT_WIDTH);
-    expect(contextValues.borderColor).toBe(DEFAULT_COLOR);
-    expect(contextValues.borderWidth).toBe(DEFAULT_THICKNESS);
-    expect(contextValues.borderRadius).toBe(DEFAULT_RADIUS);
+    expect(contextValues.cursorStyles.borderColor).toBe(DEFAULT_COLOR);
+    expect(contextValues.cursorStyles.borderWidth).toBe(DEFAULT_THICKNESS);
+    expect(contextValues.cursorStyles.borderRadius).toBe(DEFAULT_RADIUS);
   });
 });

@@ -19,14 +19,21 @@ export interface IDataCursorContext {
   y: number;
   width: number;
   height: number;
-  borderColor: string;
-  borderWidth: number;
-  borderRadius: number;
+  cursorStyles: {
+    borderColor: string;
+    borderWidth: number;
+    borderRadius: number;
+  };
 }
 
 export interface IApiCursorContext {
-  outlineElement: (e: EventTarget, color?: string, outline?: number) => void;
-  underlineElement: (e: EventTarget, color?: string) => void;
+  outlineElement: (
+    element: DOMRect,
+    elementStyles: CSSStyleDeclaration,
+    color?: string,
+    outline?: number
+  ) => void;
+  underlineElement: (element: DOMRect, color?: string) => void;
   reset: () => void;
 }
 
