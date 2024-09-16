@@ -98,8 +98,8 @@ describe('CursorProvider', () => {
 
     expect(contextData.cursorPositions).not.toEqual({ x: 0, y: 0 });
     expect(contextData.cursorSizes).toEqual({
-      width: WIDTH - DEFAULT_THICKNESS,
-      height: HEIGHT - DEFAULT_THICKNESS,
+      width: WIDTH - DEFAULT_THICKNESS / 2,
+      height: HEIGHT - DEFAULT_THICKNESS / 2,
     });
     expect(contextData.cursorStyles).toEqual({
       borderColor: DEFAULT_COLOR,

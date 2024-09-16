@@ -7,4 +7,5 @@ export const DEFAULT_TYPE = 'outline';
 export const DEFAULT_RADIUS = 9999;
 export const DEFAULT_THICKNESS = 1;
 export const DEFAULT_OFFSET = 0;
+export const DEFAULT_OFFSET_UNDERLINE = 0;
 export const DEFAULT_TRAILINGSPEED = 8;

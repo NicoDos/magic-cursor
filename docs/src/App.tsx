@@ -1,5 +1,5 @@
-import React from "react";
-import { MagicElement } from "../../lib";
+import React from 'react';
+import { MagicElement } from '../../lib';
 
 const App = () => {
   return (
@@ -40,7 +40,7 @@ const App = () => {
           </div>
         </div>
         <div className="flex">
-          <MagicElement color="#FF0066" offset={-20}>
+          <MagicElement color="#FF0066" offset={-10}>
             <div className="card-example">
               <h2>Magic inset card</h2>
               <p>I can be anything</p>
@@ -48,7 +48,7 @@ const App = () => {
             </div>
           </MagicElement>
           <div>
-            <MagicElement color="#FF0066" offset={20}>
+            <MagicElement color="#FF0066" offset={10}>
               <div className="card-example">
                 <h2>Magic offset card</h2>
                 <p>I can be anything</p>
@@ -75,7 +75,7 @@ const App = () => {
       </div>
       <div className="footer">
         <div>
-          Get the code on{" "}
+          Get the code on{' '}
           <MagicElement color="#FF0066" type="underline">
             <a href="https://github.com/NicoDos/magic-cursor">Github</a>
           </MagicElement>

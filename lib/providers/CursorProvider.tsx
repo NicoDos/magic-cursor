@@ -4,6 +4,7 @@ import {
   DEFAULT_COLOR,
   DEFAULT_HEIGHT,
   DEFAULT_OFFSET,
+  DEFAULT_OFFSET_UNDERLINE,
   DEFAULT_RADIUS,
   DEFAULT_THICKNESS,
   DEFAULT_WIDTH,
@@ -39,7 +40,8 @@ const CursorProvider = ({ thickness = DEFAULT_THICKNESS, children }: CursorProvi
 
       const radius = elementStyles.borderRadius;
       const borderRadius = radius ? +radius.replace('px', '') + 1 : 0;
-      const positionAdaptation = (offset ? offset / 2 : offset) + thickness / 2 - 1;
+      const borderWidth = +elementStyles.borderWidth || 0;
+      const positionAdaptation = (offset || 0) + thickness / 2;
 
       cursorRef.current.classList.add(HOVER_CLASSNAME);
 
@@ -48,13 +50,13 @@ const CursorProvider = ({ thickness = DEFAULT_THICKNESS, children }: CursorProvi
         y: element.y + window.scrollY - positionAdaptation,
       });
       setCursorSizes({
-        width: element.width + offset - thickness,
-        height: element.height + offset - thickness,
+        width: element.width + borderWidth + offset * 2 - thickness / 2,
+        height: element.height + borderWidth + offset * 2 - thickness / 2,
       });
       setCursorStyles((previous) => ({
         ...previous,
         borderWidth: thickness,
-        borderRadius: borderRadius + thickness + offset / Math.PI,
+        borderRadius: borderRadius + thickness + (offset * 2) / Math.PI,
         borderColor: color,
       }));
     },
@@ -62,12 +64,12 @@ const CursorProvider = ({ thickness = DEFAULT_THICKNESS, children }: CursorProvi
   );
 
   const underlineElement = useCallback(
-    (element: DOMRect, color = DEFAULT_COLOR, offset = DEFAULT_OFFSET) => {
+    (element: DOMRect, color = DEFAULT_COLOR, offset = DEFAULT_OFFSET_UNDERLINE) => {
       cursorRef.current.classList.add(HOVER_CLASSNAME);
 
       setCursorPositions({
         x: element.x + window.scrollX,
-        y: element.y + element.height + window.scrollY + offset || 10,
+        y: element.y + element.height + window.scrollY + offset,
       });
       setCursorSizes({
         height: 0,
