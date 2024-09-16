@@ -35,7 +35,10 @@ const CursorProvider = ({ thickness = DEFAULT_THICKNESS, children }: CursorProvi
       color = DEFAULT_COLOR,
       offset = DEFAULT_OFFSET
     ) => {
-      const radius = +elementStyles.borderRadius.replace('px', '') + 1;
+      if (!cursorRef.current) return;
+
+      const radius = elementStyles.borderRadius;
+      const borderRadius = radius ? +radius.replace('px', '') + 1 : 0;
       const positionAdaptation = (offset ? offset / 2 : offset) + thickness / 2 - 1;
 
       cursorRef.current.classList.add(HOVER_CLASSNAME);
@@ -51,7 +54,7 @@ const CursorProvider = ({ thickness = DEFAULT_THICKNESS, children }: CursorProvi
       setCursorStyles((previous) => ({
         ...previous,
         borderWidth: thickness,
-        borderRadius: radius + thickness + offset / Math.PI,
+        borderRadius: borderRadius + thickness + offset / Math.PI,
         borderColor: color,
       }));
     },
