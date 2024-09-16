@@ -7,7 +7,7 @@ import '../styles/global.css';
 import { DEFAULT_TRAILINGSPEED } from '../constants';
 
 const Cursor = () => {
-  const { cursorRef, x, y, height, width, cursorStyles } = useDataCursor();
+  const { cursorRef, cursorPositions, cursorSizes, cursorStyles } = useDataCursor();
 
   const { x: pointerX, y: pointerY } = useFollowPointer();
 
@@ -19,7 +19,7 @@ const Cursor = () => {
   const previousTimeRef = useRef<number | null>(null);
 
   const [coords, setCoords] = useState<CursorCoordinates>({ x: pointerX, y: pointerY });
-  const [size, setSize] = useState<CursorSize>({ width, height });
+  const [size, setSize] = useState<CursorSize>(cursorSizes);
 
   const animateCursor = useCallback(
     (time: number) => {
@@ -56,22 +56,22 @@ const Cursor = () => {
   useEffect(() => {
     if (!cursorRef.current) return;
 
-    const newX = x !== 0 ? x : pointerX;
-    const newY = y || pointerY;
+    const newX = cursorPositions.x !== 0 ? cursorPositions.x : pointerX;
+    const newY = cursorPositions.y || pointerY;
     setCoords({ x: newX, y: newY });
-    setSize({ width, height });
+    setSize(cursorSizes);
 
     endX.current = newX;
     endY.current = newY;
-    endWidth.current = width;
-    endHeight.current = height;
+    endWidth.current = cursorSizes.width;
+    endHeight.current = cursorSizes.height;
 
     Object.assign(cursorRef.current.style, {
       ...cursorStyles,
       borderWidth: `${cursorStyles.borderWidth}px`,
       borderRadius: `${cursorStyles.borderRadius}px`,
     });
-  }, [cursorRef, pointerX, pointerY, x, y, height, width, cursorStyles]);
+  }, [cursorRef, pointerX, pointerY, cursorPositions, cursorSizes, cursorStyles]);
 
   return <div className="cursor" ref={cursorRef} />;
 };

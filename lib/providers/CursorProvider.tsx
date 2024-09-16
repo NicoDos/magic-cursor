@@ -14,10 +14,14 @@ import { ApiCursorContext, DataCursorContext } from '../contexts/CursorContext';
 const CursorProvider = ({ thickness = DEFAULT_THICKNESS, children }: CursorProviderProps) => {
   const cursorRef = useRef<HTMLDivElement>(null);
 
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
-  const [height, setHeight] = useState(DEFAULT_HEIGHT);
-  const [width, setWidth] = useState(DEFAULT_WIDTH);
+  const [cursorPositions, setCursorPositions] = useState({
+    x: 0,
+    y: 0,
+  });
+  const [cursorSizes, setCursorSizes] = useState({
+    width: DEFAULT_WIDTH,
+    height: DEFAULT_HEIGHT,
+  });
   const [cursorStyles, setCursorStyles] = useState({
     borderWidth: thickness,
     borderRadius: DEFAULT_RADIUS,
@@ -32,11 +36,18 @@ const CursorProvider = ({ thickness = DEFAULT_THICKNESS, children }: CursorProvi
       offset = DEFAULT_OFFSET
     ) => {
       const radius = +elementStyles.borderRadius.replace('px', '') + 1;
+      const positionAdaptation = (offset ? offset / 2 : offset) + thickness / 2 - 1;
 
-      setX(element.x + window.scrollX - (offset ? offset / 2 : offset) + thickness / 2 - 1);
-      setY(element.y + window.scrollY - (offset ? offset / 2 : offset) + thickness / 2 - 1);
-      setHeight(element.height + offset - thickness);
-      setWidth(element.width + offset - thickness);
+      cursorRef.current.classList.add(HOVER_CLASSNAME);
+
+      setCursorPositions({
+        x: element.x + window.scrollX - positionAdaptation,
+        y: element.y + window.scrollY - positionAdaptation,
+      });
+      setCursorSizes({
+        width: element.width + offset - thickness,
+        height: element.height + offset - thickness,
+      });
       setCursorStyles((previous) => ({
         ...previous,
         borderWidth: thickness,
@@ -49,10 +60,16 @@ const CursorProvider = ({ thickness = DEFAULT_THICKNESS, children }: CursorProvi
 
   const underlineElement = useCallback(
     (element: DOMRect, color = DEFAULT_COLOR, offset = DEFAULT_OFFSET) => {
-      setX(element.x + window.scrollX);
-      setY(element.y + element.height + window.scrollY + offset || 10);
-      setHeight(0);
-      setWidth(element.width);
+      cursorRef.current.classList.add(HOVER_CLASSNAME);
+
+      setCursorPositions({
+        x: element.x + window.scrollX,
+        y: element.y + element.height + window.scrollY + offset || 10,
+      });
+      setCursorSizes({
+        height: 0,
+        width: element.width,
+      });
       setCursorStyles((previous) => ({
         ...previous,
         borderWidth: thickness / 2,
@@ -63,10 +80,14 @@ const CursorProvider = ({ thickness = DEFAULT_THICKNESS, children }: CursorProvi
   );
 
   const reset = useCallback(() => {
-    setHeight(DEFAULT_HEIGHT);
-    setWidth(DEFAULT_WIDTH);
-    setX(0);
-    setY(0);
+    setCursorPositions({
+      x: 0,
+      y: 0,
+    });
+    setCursorSizes({
+      height: DEFAULT_HEIGHT,
+      width: DEFAULT_WIDTH,
+    });
     setCursorStyles((previous) => ({
       ...previous,
       borderWidth: thickness,
@@ -81,10 +102,8 @@ const CursorProvider = ({ thickness = DEFAULT_THICKNESS, children }: CursorProvi
 
   const dataValue = {
     cursorRef,
-    x,
-    y,
-    height,
-    width,
+    cursorPositions,
+    cursorSizes,
     cursorStyles,
   };
 

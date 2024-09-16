@@ -15,10 +15,14 @@ export interface ElementProps extends HTMLAttributes<HTMLElement> {
 
 export interface IDataCursorContext {
   cursorRef: MutableRefObject<HTMLDivElement> | null;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
+  cursorPositions: {
+    x: number;
+    y: number;
+  };
+  cursorSizes: {
+    width: number;
+    height: number;
+  };
   cursorStyles: {
     borderColor: string;
     borderWidth: number;

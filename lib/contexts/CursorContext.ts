@@ -10,10 +10,14 @@ import {
 
 export const DataCursorContext = createContext<IDataCursorContext>({
   cursorRef: null,
-  x: 0,
-  y: 0,
-  width: DEFAULT_WIDTH,
-  height: DEFAULT_HEIGHT,
+  cursorPositions: {
+    x: 0,
+    y: 0,
+  },
+  cursorSizes: {
+    width: DEFAULT_WIDTH,
+    height: DEFAULT_HEIGHT,
+  },
   cursorStyles: {
     borderColor: DEFAULT_COLOR,
     borderWidth: DEFAULT_THICKNESS,

@@ -1,6 +1,6 @@
 import React, { MouseEvent, useCallback, Children, cloneElement } from 'react';
 
-import { useApiCursor } from '../contexts/CursorContext';
+import { useApiCursor, useDataCursor } from '../contexts/CursorContext';
 import type { ElementProps } from '../index.d';
 import { DEFAULT_COLOR, DEFAULT_OFFSET, DEFAULT_TYPE } from '../constants';
 
