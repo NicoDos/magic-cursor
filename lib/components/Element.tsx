@@ -1,6 +1,6 @@
-import React, { MouseEvent, useCallback, useContext, Children, cloneElement } from 'react';
+import React, { MouseEvent, useCallback, Children, cloneElement } from 'react';
 
-import { ApiCursorContext, DataCursorContext } from '../contexts/CursorContext';
+import { useApiCursor, useDataCursor } from '../contexts/CursorContext';
 import type { ElementProps } from '../index.d';
 import { DEFAULT_COLOR, DEFAULT_OFFSET, DEFAULT_TYPE, HOVER_CLASSNAME } from '../constants';
 
@@ -12,8 +12,8 @@ const Element = ({
   className = '',
   ...props
 }: ElementProps) => {
-  const { cursorRef } = useContext(DataCursorContext);
-  const { outlineElement, underlineElement, reset } = useContext(ApiCursorContext);
+  const { cursorRef } = useDataCursor();
+  const { outlineElement, underlineElement, reset } = useApiCursor();
 
   const handleMouseEnter = useCallback(
     (e: MouseEvent<HTMLElement>) => {

@@ -1,6 +1,6 @@
 import { useFollowPointer } from '../hooks/useFollowPointer';
-import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import { DataCursorContext } from '../contexts/CursorContext';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useDataCursor } from '../contexts/CursorContext';
 import { CursorCoordinates, CursorSize } from '../index.d';
 
 import '../styles/global.css';
@@ -8,7 +8,7 @@ import { DEFAULT_TRAILINGSPEED } from '../constants';
 
 const Cursor = () => {
   const { cursorRef, x, y, height, width, borderColor, borderWidth, borderRadius } =
-    useContext(DataCursorContext);
+    useDataCursor();
 
   const { x: pointerX, y: pointerY } = useFollowPointer();
 
@@ -77,4 +77,4 @@ const Cursor = () => {
   return <div className="cursor" ref={cursorRef} />;
 };
 
-export default Cursor;
+export default React.memo(Cursor);

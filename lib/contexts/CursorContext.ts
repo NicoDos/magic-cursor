@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
 import type { IDataCursorContext, IApiCursorContext } from '../index.d';
 import {
   DEFAULT_COLOR,
@@ -24,3 +24,6 @@ export const ApiCursorContext = createContext<IApiCursorContext>({
   underlineElement: (e) => e,
   reset: () => {},
 });
+
+export const useDataCursor = () => useContext(DataCursorContext);
+export const useApiCursor = () => useContext(ApiCursorContext);
