@@ -1,8 +1,8 @@
-import React, { MouseEvent, useCallback, Children, cloneElement } from 'react';
+import React, { Children, cloneElement, MouseEvent, useCallback } from 'react';
 
-import { useApiCursor, useDataCursor } from '../contexts/CursorContext';
-import type { ElementProps } from '../index.d';
-import { DEFAULT_COLOR, DEFAULT_OFFSET, DEFAULT_TYPE } from '../constants';
+import { DEFAULT_COLOR, DEFAULT_OFFSET, DEFAULT_TYPE } from '@/constants';
+import { useApiCursor } from '@/contexts/CursorContext';
+import type { ElementProps } from '@/index.d';
 
 const Element = ({
   children,

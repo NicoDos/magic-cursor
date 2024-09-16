@@ -1,4 +1,4 @@
-import { renderHook, fireEvent } from '@testing-library/react';
+import { fireEvent, renderHook } from '@testing-library/react';
 import { useWindowScroll } from '/Users/nsandron/Documents/GitHub/magic-cursor/lib/hooks/useWindowScroll';
 
 describe('useWindowScroll', () => {

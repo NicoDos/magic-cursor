@@ -1,10 +1,10 @@
-import { useFollowPointer } from '../hooks/useFollowPointer';
+import { useFollowPointer } from '@/hooks/useFollowPointer';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useDataCursor } from '../contexts/CursorContext';
-import { CursorCoordinates, CursorSize } from '../index.d';
+import { useDataCursor } from '@/contexts/CursorContext';
+import { CursorCoordinates, CursorSize } from '@/index.d';
 
-import '../styles/global.css';
-import { DEFAULT_TRAILINGSPEED } from '../constants';
+import '@/styles/global.css';
+import { DEFAULT_TRAILINGSPEED } from '@/constants';
 
 const Cursor = () => {
   const { cursorRef, cursorPositions, cursorSizes, cursorStyles } = useDataCursor();
@@ -41,6 +41,8 @@ const Cursor = () => {
       previousTimeRef.current = time;
       requestAnimationRef.current = requestAnimationFrame(animateCursor);
     },
+    /* eslint-disable react-hooks/exhaustive-deps */
+    // exclude size and coords from dependencies to avoid weird animation behavior
     [requestAnimationRef]
   );
 

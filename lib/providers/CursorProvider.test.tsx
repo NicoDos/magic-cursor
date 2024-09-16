@@ -1,14 +1,14 @@
 import { act, render } from '@testing-library/react';
 import CursorProvider from './CursorProvider';
-import { useApiCursor, useDataCursor } from '../contexts/CursorContext';
+import { useApiCursor, useDataCursor } from '@/contexts/CursorContext';
 import {
   DEFAULT_COLOR,
   DEFAULT_HEIGHT,
   DEFAULT_RADIUS,
   DEFAULT_THICKNESS,
   DEFAULT_WIDTH,
-} from '../constants';
-import { IApiCursorContext, IDataCursorContext } from '../index.d';
+} from '@/constants';
+import { IApiCursorContext, IDataCursorContext } from '@/index.d';
 import React from 'react';
 
 let contextData: IDataCursorContext;

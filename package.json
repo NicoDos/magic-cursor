@@ -1,6 +1,6 @@
 {
   "name": "react-magic-cursor",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A cursor that follows your mouse and adapt its size shape and color based on the hovered element.",
   "author": "Nicolas Sandron <nicolas.sandron@gmail.com>",
   "homepage": "https://sweetpotato.fr",
@@ -23,12 +23,12 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint . --ext .ts,.tsx",
     "pack": "npm pack --pack-destination ~",
     "preview": "vite preview",
     "prepublishOnly": "npm run build",
     "test": "jest --config --coverage=false",
-    "test:watch": "jest --config --silent --watch --coverage=false"
+    "test:watch": "jest --config --silent --watch --coverage=false --silent=false"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.2",
@@ -36,11 +36,12 @@
     "@types/jest": "^29.5.12",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@vitejs/plugin-react": "^4.2.1",
-    "eslint": "^8.56.0",
+    "eslint": "^8.47.0",
+    "eslint-plugin-no-relative-import-paths": "^1.5.4",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "ts-jest": "^29.1.2",

@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
-import type { CursorProviderProps } from '../index.d';
+import type { CursorProviderProps } from '@/index.d';
 import {
   DEFAULT_COLOR,
   DEFAULT_HEIGHT,
@@ -8,8 +8,8 @@ import {
   DEFAULT_THICKNESS,
   DEFAULT_WIDTH,
   HOVER_CLASSNAME,
-} from '../constants';
-import { ApiCursorContext, DataCursorContext } from '../contexts/CursorContext';
+} from '@/constants';
+import { ApiCursorContext, DataCursorContext } from '@/contexts/CursorContext';
 
 const CursorProvider = ({ thickness = DEFAULT_THICKNESS, children }: CursorProviderProps) => {
   const cursorRef = useRef<HTMLDivElement>(null);
