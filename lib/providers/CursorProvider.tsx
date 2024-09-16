@@ -1,5 +1,4 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { CursorContext } from '../contexts/CursorContext';
 import type { CursorProviderProps } from '../index.d';
 import {
   DEFAULT_COLOR,
@@ -10,6 +9,7 @@ import {
   DEFAULT_WIDTH,
   HOVER_CLASSNAME,
 } from '../constants';
+import { ApiCursorContext, DataCursorContext } from '../contexts/CursorContext';
 
 const CursorProvider = ({ thickness = DEFAULT_THICKNESS, children }: CursorProviderProps) => {
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -21,18 +21,29 @@ const CursorProvider = ({ thickness = DEFAULT_THICKNESS, children }: CursorProvi
   const [borderColor, setBorderColor] = useState(DEFAULT_COLOR);
   const [borderWidth, setBorderWidth] = useState(thickness);
   const [borderRadius, setBorderRadius] = useState(DEFAULT_RADIUS);
+  const [cursorStyles, setCursorStyles] = useState({
+    borderWidth: thickness,
+    borderRadius: DEFAULT_RADIUS,
+    borderColor: DEFAULT_COLOR,
+  });
 
   const outlineElement = useCallback(
     (e: HTMLElement, color = DEFAULT_COLOR, offset = DEFAULT_OFFSET) => {
       const element = e.getBoundingClientRect();
       const radius = +getComputedStyle(e).borderRadius.replace('px', '') + 1;
 
-      setBorderRadius(radius + thickness + offset / Math.PI);
       setX(element.x + window.scrollX - (offset ? offset / 2 : offset) + thickness / 2 - 1);
       setY(element.y + window.scrollY - (offset ? offset / 2 : offset) + thickness / 2 - 1);
       setHeight(element.height + offset - thickness);
       setWidth(element.width + offset - thickness);
       setBorderColor(color);
+      setBorderRadius(radius + thickness + offset / Math.PI);
+      setCursorStyles((previous) => ({
+        ...previous,
+        borderWidth: thickness,
+        borderRadius: radius + thickness + offset / Math.PI,
+        borderColor: color,
+      }));
     },
     [thickness]
   );
@@ -79,7 +90,11 @@ const CursorProvider = ({ thickness = DEFAULT_THICKNESS, children }: CursorProvi
     reset,
   };
 
-  return <CursorContext.Provider value={value}>{children}</CursorContext.Provider>;
+  return (
+    <DataCursorContext.Provider value={value}>
+      <ApiCursorContext.Provider value={value}>{children}</ApiCursorContext.Provider>
+    </DataCursorContext.Provider>
+  );
 };
 
 export default CursorProvider;

@@ -13,7 +13,7 @@ export interface ElementProps extends HTMLAttributes<HTMLElement> {
   className?: string;
 }
 
-export interface ICursorContext {
+export interface IDataCursorContext {
   cursorRef: MutableRefObject<HTMLDivElement> | null;
   x: number;
   y: number;
@@ -22,6 +22,9 @@ export interface ICursorContext {
   borderColor: string;
   borderWidth: number;
   borderRadius: number;
+}
+
+export interface IApiCursorContext {
   outlineElement: (e: EventTarget, color?: string, outline?: number) => void;
   underlineElement: (e: EventTarget, color?: string) => void;
   reset: () => void;

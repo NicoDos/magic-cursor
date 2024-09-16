@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import type { ICursorContext } from '../index.d';
+import type { IDataCursorContext, IApiCursorContext } from '../index.d';
 import {
   DEFAULT_COLOR,
   DEFAULT_HEIGHT,
@@ -8,7 +8,7 @@ import {
   DEFAULT_WIDTH,
 } from '../constants';
 
-export const CursorContext = createContext<ICursorContext>({
+export const DataCursorContext = createContext<IDataCursorContext>({
   cursorRef: null,
   x: 0,
   y: 0,
@@ -17,6 +17,9 @@ export const CursorContext = createContext<ICursorContext>({
   borderColor: DEFAULT_COLOR,
   borderWidth: DEFAULT_THICKNESS,
   borderRadius: DEFAULT_RADIUS,
+});
+
+export const ApiCursorContext = createContext<IApiCursorContext>({
   outlineElement: (e) => e,
   underlineElement: (e) => e,
   reset: () => {},
