@@ -21,7 +21,7 @@ const App = () => {
           <MagicElement color="#FF0066">
             <button>Magic button</button>
           </MagicElement>
-          <MagicElement color="#89d205" className="mx-4">
+          <MagicElement color="#09b52c" className="mx-4">
             <button className="green">
               I am a <span className="green">green</span> magic button
             </button>
@@ -39,7 +39,7 @@ const App = () => {
             <MagicElement color="#FF0066" type="underline" className="mx-4">
               <a href="#">Magic link</a>
             </MagicElement>
-            <MagicElement color="#89d205" type="underline" className="mx-4">
+            <MagicElement color="#09b52c" type="underline" className="mx-4">
               <a href="#" className="green">
                 Green magic link
               </a>
@@ -91,22 +91,22 @@ const App = () => {
       <section>
         <h2>Forms</h2>
         <div className="flex m-4">
-          <MagicElement color="#89d205" offset={1}>
+          <MagicElement color="#09b52c" offset={1}>
             <input type="text" placeholder="Insert your name..." />
           </MagicElement>
-          <MagicElement color="#89d205" offset={1}>
+          <MagicElement offset={1}>
             <input type="checkbox" id="checkbox" />
           </MagicElement>
           <label htmlFor="checkbox">Check me</label>
         </div>
         <div className="flex m-4">
-          <MagicElement color="#89d205" offset={1}>
+          <MagicElement color="#FF0066" offset={1}>
             <select>
               <option value="1">Many choices</option>
               <option value="2">Make yours</option>
             </select>
           </MagicElement>
-          <MagicElement color="#89d205" offset={1} className="rounded-full">
+          <MagicElement color="#09b52c" offset={1} className="rounded-full">
             <input type="radio" id="radio" />
           </MagicElement>
           <label htmlFor="radio">Thick me</label>

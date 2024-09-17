@@ -81,7 +81,7 @@ button {
 }
 
 button:hover {
-  background-color: #ffdeeb;
+  background-color: #313131;
 }
 
 button:active {
@@ -149,5 +149,9 @@ footer {
 
   button {
     background-color: #f9f9f9;
+  }
+
+  button:hover {
+    background-color: #ffdeeb;
   }
 }
