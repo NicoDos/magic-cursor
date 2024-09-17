@@ -3,8 +3,9 @@ import React, { useEffect, useRef } from 'react';
 import { useCursorData } from '@/contexts/CursorContext';
 import { Position, Size } from '@/index.types';
 
-import '@/styles/global.css';
 import { DEFAULT_TRAILINGSPEED } from '@/constants';
+
+import '@/styles/global.css';
 
 const Cursor: React.FC = () => {
   const { cursorRef, cursorFrozenPosition, cursorSize, cursorStyles } = useCursorData();
@@ -62,7 +63,7 @@ const Cursor: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <div className="cursor" ref={cursorRef} />;
+  return <div className="cursor" ref={cursorRef} data-testid="cursor" />;
 };
 
 export default Cursor;

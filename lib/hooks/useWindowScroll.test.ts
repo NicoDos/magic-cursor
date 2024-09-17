@@ -6,7 +6,7 @@ describe('useWindowScroll', () => {
     jest.clearAllMocks();
   });
 
-  test('should update scrollX and scrollY when window is scrolled', () => {
+  test('updates scrollX and scrollY when window is scrolled', () => {
     const { result } = renderHook(() => useWindowScroll());
 
     expect(result.current.scrollX).toBe(0);

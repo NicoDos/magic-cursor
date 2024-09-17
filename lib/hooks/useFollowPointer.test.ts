@@ -11,7 +11,7 @@ describe('useFollowPointer', () => {
     jest.clearAllMocks();
   });
 
-  test('should update point coordinates when pointer is moved', () => {
+  test('updates point coordinates when pointer is moved', () => {
     const scrollX = 100;
     const scrollY = 200;
     const clientX = 50;
@@ -33,7 +33,7 @@ describe('useFollowPointer', () => {
     });
   });
 
-  test('should remove event listener on unmount', () => {
+  test('removes event listener on unmount', () => {
     const removeEventListenerMock = jest.spyOn(window, 'removeEventListener');
 
     (useWindowScroll as jest.Mock).mockReturnValue({ scrollX: 0, scrollY: 0 });
