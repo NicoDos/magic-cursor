@@ -8,7 +8,7 @@ import {
   DEFAULT_THICKNESS,
   DEFAULT_WIDTH,
 } from '@/constants';
-import { IApiCursorContext, IDataCursorContext } from '@/index.d';
+import { IApiCursorContext, IDataCursorContext } from '@/index.types';
 import React from 'react';
 
 let contextData: IDataCursorContext;

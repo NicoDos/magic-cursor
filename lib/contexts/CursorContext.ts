@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import type { IApiCursorContext, IDataCursorContext } from '@/index.d';
+import type { IApiCursorContext, IDataCursorContext } from '@/index.types';
 
 export const DataCursorContext = createContext<IDataCursorContext>(null);
 

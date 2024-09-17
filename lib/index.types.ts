@@ -1,5 +1,9 @@
 import { HTMLAttributes, MutableRefObject, ReactElement, ReactNode } from 'react';
 
+export interface CursorProps {
+  a?: any;
+}
+
 export interface CursorProviderProps {
   children: ReactNode;
   thickness?: number;

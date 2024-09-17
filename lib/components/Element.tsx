@@ -2,16 +2,16 @@ import React, { Children, cloneElement, MouseEvent, useCallback } from 'react';
 
 import { DEFAULT_COLOR, DEFAULT_OFFSET, DEFAULT_TYPE } from '@/constants';
 import { useApiCursor } from '@/contexts/CursorContext';
-import type { ElementProps } from '@/index.d';
+import type { ElementProps } from '@/index.types';
 
-const Element = ({
+const Element: React.FC<ElementProps> = ({
   children,
   type = DEFAULT_TYPE,
   color = DEFAULT_COLOR,
   offset = DEFAULT_OFFSET,
   className = '',
   ...props
-}: ElementProps) => {
+}) => {
   const { outlineElement, underlineElement, reset } = useApiCursor();
 
   const handleMouseEnter = useCallback(
@@ -44,4 +44,4 @@ const Element = ({
   );
 };
 
-export default React.memo(Element);
+export default Element;
