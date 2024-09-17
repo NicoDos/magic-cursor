@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { useWindowScroll } from './useWindowScroll';
 
-export function useFollowPointer() {
-  const [point, setPoint] = useState({ x: 0, y: 0 });
+export const useFollowPointer = () => {
+  const [pointerPosition, setPointerPosition] = useState({ x: 0, y: 0 });
   const { scrollX, scrollY } = useWindowScroll();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!window) return;
 
     const handlePointerMove = ({ clientX, clientY }: MouseEvent) => {
-      setPoint({ x: clientX + scrollX, y: clientY + scrollY });
+      setPointerPosition({ x: clientX + scrollX, y: clientY + scrollY });
     };
 
     window.addEventListener('pointermove', handlePointerMove);
@@ -17,5 +17,5 @@ export function useFollowPointer() {
     return () => window.removeEventListener('pointermove', handlePointerMove);
   }, [scrollX, scrollY]);
 
-  return point;
-}
+  return pointerPosition;
+};

@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
-import { Position, type CursorProviderProps } from '@/index.types';
+
+import { type CursorProviderProps, Position } from '@/index.types';
 import {
   DEFAULT_COLOR,
   DEFAULT_HEIGHT,
@@ -18,7 +19,7 @@ const CursorProvider: React.FC<CursorProviderProps> = ({
 }) => {
   const cursorRef = useRef<HTMLDivElement>(null);
 
-  const [cursorFrozenPosition, setCursorFrozenPosition] = useState<Position>({ x: 0, y: 0 });
+  const [cursorFrozenPosition, setCursorFrozenPosition] = useState<Position>(null);
   const [cursorSize, setCursorSize] = useState({
     width: DEFAULT_WIDTH,
     height: DEFAULT_HEIGHT,
@@ -39,20 +40,20 @@ const CursorProvider: React.FC<CursorProviderProps> = ({
       if (!cursorRef.current) return;
 
       const { borderRadius, borderWidth } = elementStyles;
-      const elementBorderRadius = +borderRadius.replace('px', '') + 1;
+      const elementBorderRadius = +borderRadius.replace('px', '');
       const elementBorderWidth = +borderWidth || 0;
-      const positionAdaptation = (offset || 0) + thickness / 2;
-      const sizeAdaptation = elementBorderWidth + offset * 2 - thickness / 2;
+      const positionPolish = offset + thickness / 2;
+      const sizePolish = elementBorderWidth + offset * 2;
 
       cursorRef.current.classList.add(HOVER_CLASSNAME);
 
       setCursorFrozenPosition({
-        x: element.x + window.scrollX - positionAdaptation,
-        y: element.y + window.scrollY - positionAdaptation,
+        x: element.x + window.scrollX - positionPolish,
+        y: element.y + window.scrollY - positionPolish,
       });
       setCursorSize({
-        width: element.width + sizeAdaptation,
-        height: element.height + sizeAdaptation,
+        width: element.width + sizePolish,
+        height: element.height + sizePolish,
       });
       setCursorStyles((previous) => ({
         ...previous,
@@ -89,10 +90,7 @@ const CursorProvider: React.FC<CursorProviderProps> = ({
   );
 
   const leaveElement = useCallback(() => {
-    setCursorFrozenPosition({
-      x: 0,
-      y: 0,
-    });
+    setCursorFrozenPosition(null);
     setCursorSize({
       height: DEFAULT_HEIGHT,
       width: DEFAULT_WIDTH,
@@ -104,9 +102,7 @@ const CursorProvider: React.FC<CursorProviderProps> = ({
       borderColor: DEFAULT_COLOR,
     }));
 
-    if (cursorRef.current) {
-      cursorRef.current.classList.remove(HOVER_CLASSNAME);
-    }
+    cursorRef.current?.classList.remove(HOVER_CLASSNAME);
   }, [thickness]);
 
   const dataValue = useMemo(

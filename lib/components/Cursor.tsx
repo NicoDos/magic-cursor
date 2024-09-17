@@ -5,7 +5,7 @@ import { Position, Size } from '@/index.types';
 
 import { DEFAULT_TRAILINGSPEED } from '@/constants';
 
-import '@/styles/global.css';
+import '@/styles/cursor.css';
 
 const Cursor: React.FC = () => {
   const { cursorRef, cursorFrozenPosition, cursorSize, cursorStyles } = useCursorData();
@@ -21,12 +21,7 @@ const Cursor: React.FC = () => {
   useEffect(() => {
     if (!cursorRef.current) return;
 
-    const nextPosition = {
-      x: cursorFrozenPosition.x || pointerPosition.x,
-      y: cursorFrozenPosition.y || pointerPosition.y,
-    };
-
-    targetPosition.current = nextPosition;
+    targetPosition.current = cursorFrozenPosition || pointerPosition;
     targetSize.current = cursorSize;
 
     Object.assign(cursorRef.current.style, {
@@ -53,7 +48,7 @@ const Cursor: React.FC = () => {
       requestAnimationRef.current = requestAnimationFrame(animateCursor);
     };
 
-    animateCursor();
+    requestAnimationRef.current = requestAnimationFrame(animateCursor);
 
     return () => {
       if (requestAnimationRef.current) {

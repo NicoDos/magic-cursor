@@ -32,6 +32,10 @@
   margin-right: 1rem;
 }
 
+.rounded-full {
+  border-radius: 9999px;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -108,11 +112,24 @@ button.green:active {
 .card-example {
   text-align: left;
   padding: 20px !important;
-  border: 1px solid #cccccc;
+  border: 2px solid #cccccc;
   border-radius: 20px;
 }
 
-.footer {
+input[type='text'],
+select {
+  padding: 0.5em 1em;
+  border-radius: 8px;
+  border: 1px solid #cccccc;
+  font-size: 1em;
+  font-family: inherit;
+}
+
+section {
+  margin: 50px 0;
+}
+
+footer {
   margin-top: 50px;
 }
 
