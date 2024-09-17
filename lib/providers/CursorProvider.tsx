@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
-import type { CursorProviderProps } from '@/index.types';
+import { Position, type CursorProviderProps } from '@/index.types';
 import {
   DEFAULT_COLOR,
   DEFAULT_HEIGHT,
@@ -18,11 +18,8 @@ const CursorProvider: React.FC<CursorProviderProps> = ({
 }) => {
   const cursorRef = useRef<HTMLDivElement>(null);
 
-  const [cursorPositions, setCursorPositions] = useState({
-    x: 0,
-    y: 0,
-  });
-  const [cursorSizes, setCursorSizes] = useState({
+  const [cursorFrozenPosition, setCursorFrozenPosition] = useState<Position>({ x: 0, y: 0 });
+  const [cursorSize, setCursorSize] = useState({
     width: DEFAULT_WIDTH,
     height: DEFAULT_HEIGHT,
   });
@@ -36,63 +33,67 @@ const CursorProvider: React.FC<CursorProviderProps> = ({
     (
       element: DOMRect,
       elementStyles: CSSStyleDeclaration,
-      color = DEFAULT_COLOR,
+      borderColor = DEFAULT_COLOR,
       offset = DEFAULT_OFFSET
     ) => {
       if (!cursorRef.current) return;
 
-      const radius = elementStyles.borderRadius;
-      const borderRadius = radius ? +radius.replace('px', '') + 1 : 0;
-      const borderWidth = +elementStyles.borderWidth || 0;
+      const { borderRadius, borderWidth } = elementStyles;
+      const elementBorderRadius = +borderRadius.replace('px', '') + 1;
+      const elementBorderWidth = +borderWidth || 0;
       const positionAdaptation = (offset || 0) + thickness / 2;
+      const sizeAdaptation = elementBorderWidth + offset * 2 - thickness / 2;
 
       cursorRef.current.classList.add(HOVER_CLASSNAME);
 
-      setCursorPositions({
+      setCursorFrozenPosition({
         x: element.x + window.scrollX - positionAdaptation,
         y: element.y + window.scrollY - positionAdaptation,
       });
-      setCursorSizes({
-        width: element.width + borderWidth + offset * 2 - thickness / 2,
-        height: element.height + borderWidth + offset * 2 - thickness / 2,
+      setCursorSize({
+        width: element.width + sizeAdaptation,
+        height: element.height + sizeAdaptation,
       });
       setCursorStyles((previous) => ({
         ...previous,
-        borderWidth: thickness,
-        borderRadius: borderRadius + thickness + (offset * 2) / Math.PI,
-        borderColor: color,
+        borderRadius: elementBorderRadius + thickness + (offset * 2) / Math.PI,
+        borderColor,
       }));
     },
     [thickness]
   );
 
   const underlineElement = useCallback(
-    (element: DOMRect, color = DEFAULT_COLOR, offset = DEFAULT_OFFSET_UNDERLINE) => {
+    (element: DOMRect, borderColor = DEFAULT_COLOR, offset = DEFAULT_OFFSET_UNDERLINE) => {
+      if (!cursorRef.current) return;
+
+      const borderWidth = thickness / 2;
+
       cursorRef.current.classList.add(HOVER_CLASSNAME);
 
-      setCursorPositions({
+      setCursorFrozenPosition({
         x: element.x + window.scrollX,
         y: element.y + element.height + window.scrollY + offset,
       });
-      setCursorSizes({
-        height: 0,
+      setCursorSize({
         width: element.width,
+        height: 0,
       });
       setCursorStyles((previous) => ({
         ...previous,
-        borderWidth: thickness / 2,
-        borderColor: color,
+        borderWidth,
+        borderColor,
       }));
     },
     [thickness]
   );
 
-  const reset = useCallback(() => {
-    setCursorPositions({
+  const leaveElement = useCallback(() => {
+    setCursorFrozenPosition({
       x: 0,
       y: 0,
     });
-    setCursorSizes({
+    setCursorSize({
       height: DEFAULT_HEIGHT,
       width: DEFAULT_WIDTH,
     });
@@ -111,20 +112,20 @@ const CursorProvider: React.FC<CursorProviderProps> = ({
   const dataValue = useMemo(
     () => ({
       cursorRef,
-      cursorPositions,
-      cursorSizes,
+      cursorFrozenPosition,
+      cursorSize,
       cursorStyles,
     }),
-    [cursorRef, cursorPositions, cursorSizes, cursorStyles]
+    [cursorRef, cursorFrozenPosition, cursorSize, cursorStyles]
   );
 
   const apiValue = useMemo(
     () => ({
       outlineElement,
       underlineElement,
-      reset,
+      leaveElement,
     }),
-    [outlineElement, underlineElement, reset]
+    [outlineElement, underlineElement, leaveElement]
   );
 
   return (

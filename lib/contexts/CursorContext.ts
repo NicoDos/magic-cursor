@@ -5,5 +5,5 @@ export const DataCursorContext = createContext<IDataCursorContext>(null);
 
 export const ApiCursorContext = createContext<IApiCursorContext>(null);
 
-export const useDataCursor = () => useContext(DataCursorContext);
-export const useApiCursor = () => useContext(ApiCursorContext);
+export const useCursorData = () => useContext(DataCursorContext);
+export const useCursorApi = () => useContext(ApiCursorContext);

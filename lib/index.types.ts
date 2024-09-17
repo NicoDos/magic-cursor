@@ -1,9 +1,5 @@
 import { HTMLAttributes, MutableRefObject, ReactElement, ReactNode } from 'react';
 
-export interface CursorProps {
-  a?: any;
-}
-
 export interface CursorProviderProps {
   children: ReactNode;
   thickness?: number;
@@ -19,11 +15,11 @@ export interface ElementProps extends HTMLAttributes<HTMLElement> {
 
 export interface IDataCursorContext {
   cursorRef: MutableRefObject<HTMLDivElement> | null;
-  cursorPositions: {
+  cursorFrozenPosition: {
     x: number;
     y: number;
   };
-  cursorSizes: {
+  cursorSize: {
     width: number;
     height: number;
   };
@@ -42,14 +38,14 @@ export interface IApiCursorContext {
     outline?: number
   ) => void;
   underlineElement: (element: DOMRect, color?: string) => void;
-  reset: () => void;
+  leaveElement: () => void;
 }
 
-export interface CursorCoordinates {
+export interface Position {
   x: number;
   y: number;
 }
-export interface CursorSize {
+export interface Size {
   width: number;
   height: number;
 }

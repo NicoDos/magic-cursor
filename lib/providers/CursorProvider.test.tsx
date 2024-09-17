@@ -1,6 +1,6 @@
 import { act, render } from '@testing-library/react';
 import CursorProvider from './CursorProvider';
-import { useApiCursor, useDataCursor } from '@/contexts/CursorContext';
+import { useCursorApi, useCursorData } from '@/contexts/CursorContext';
 import {
   DEFAULT_COLOR,
   DEFAULT_HEIGHT,
@@ -34,8 +34,8 @@ jest.spyOn(React, 'useRef').mockReturnValue({
 });
 
 const TestComponent = () => {
-  contextData = useDataCursor();
-  contextApi = useApiCursor();
+  contextData = useCursorData();
+  contextApi = useCursorApi();
 
   return (
     <div data-testid="element" style={{ borderRadius: `${BORDER_RADIUS}px` }}>
@@ -73,8 +73,8 @@ describe('CursorProvider', () => {
       </CursorProvider>
     );
 
-    expect(contextData.cursorPositions).toEqual({ x: 0, y: 0 });
-    expect(contextData.cursorSizes).toEqual({ width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT });
+    expect(contextData.cursorFrozenPosition).toEqual({ x: 0, y: 0 });
+    expect(contextData.cursorSize).toEqual({ width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT });
     expect(contextData.cursorStyles).toEqual({
       borderColor: DEFAULT_COLOR,
       borderWidth: DEFAULT_THICKNESS,
@@ -96,8 +96,8 @@ describe('CursorProvider', () => {
       contextApi.outlineElement(element, elementStyles);
     });
 
-    expect(contextData.cursorPositions).not.toEqual({ x: 0, y: 0 });
-    expect(contextData.cursorSizes).toEqual({
+    expect(contextData.cursorFrozenPosition).not.toEqual({ x: 0, y: 0 });
+    expect(contextData.cursorSize).toEqual({
       width: WIDTH - DEFAULT_THICKNESS / 2,
       height: HEIGHT - DEFAULT_THICKNESS / 2,
     });
@@ -121,8 +121,8 @@ describe('CursorProvider', () => {
       contextApi.underlineElement(element);
     });
 
-    expect(contextData.cursorPositions).not.toEqual({ x: 0, y: 0 });
-    expect(contextData.cursorSizes).toEqual({ width: WIDTH, height: 0 });
+    expect(contextData.cursorFrozenPosition).not.toEqual({ x: 0, y: 0 });
+    expect(contextData.cursorSize).toEqual({ width: WIDTH, height: 0 });
     expect(contextData.cursorStyles).toEqual({
       borderColor: DEFAULT_COLOR,
       borderWidth: DEFAULT_THICKNESS / 2,
@@ -130,7 +130,7 @@ describe('CursorProvider', () => {
     });
   });
 
-  it('resets cursor context values when reset is called', () => {
+  it('resets cursor context values when leaveElement is called', () => {
     const screen = render(
       <CursorProvider>
         <TestComponent />
@@ -142,11 +142,11 @@ describe('CursorProvider', () => {
 
     act(() => {
       contextApi.outlineElement(element, elementStyles);
-      contextApi.reset();
+      contextApi.leaveElement();
     });
 
-    expect(contextData.cursorPositions).toEqual({ x: 0, y: 0 });
-    expect(contextData.cursorSizes).toEqual({ width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT });
+    expect(contextData.cursorFrozenPosition).toEqual({ x: 0, y: 0 });
+    expect(contextData.cursorSize).toEqual({ width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT });
     expect(contextData.cursorStyles).toEqual({
       borderColor: DEFAULT_COLOR,
       borderWidth: DEFAULT_THICKNESS,

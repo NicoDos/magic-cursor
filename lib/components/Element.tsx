@@ -1,7 +1,7 @@
 import React, { Children, cloneElement, MouseEvent, useCallback } from 'react';
 
 import { DEFAULT_COLOR, DEFAULT_OFFSET, DEFAULT_TYPE } from '@/constants';
-import { useApiCursor } from '@/contexts/CursorContext';
+import { useCursorApi } from '@/contexts/CursorContext';
 import type { ElementProps } from '@/index.types';
 
 const Element: React.FC<ElementProps> = ({
@@ -12,7 +12,7 @@ const Element: React.FC<ElementProps> = ({
   className = '',
   ...props
 }) => {
-  const { outlineElement, underlineElement, reset } = useApiCursor();
+  const { outlineElement, underlineElement, leaveElement } = useCursorApi();
 
   const handleMouseEnter = useCallback(
     (e: MouseEvent<HTMLElement>) => {
@@ -31,8 +31,8 @@ const Element: React.FC<ElementProps> = ({
   );
 
   const handleMouseLeave = useCallback(() => {
-    reset();
-  }, [reset]);
+    leaveElement();
+  }, [leaveElement]);
 
   return Children.map(children, (child) =>
     cloneElement(child, {
